@@ -22,9 +22,9 @@ const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)
 function home(){applyTheme(null);const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
  const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${bgOf(t,'card')};--acc:${themeOf(t).accent}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
+ app.innerHTML=`<header><h1>Trips</h1><div class="row">${SHARE?'':'<button class="btn pri" id="scan">📥 Check inbox</button>'}<button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
- $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
+ $('#th').onclick=toggleTheme;$('#scan')&&($('#scan').onclick=scan);$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
 function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  const m=[];if(it.start&&!it.allTrip)m.push();
@@ -74,23 +74,10 @@ async function boot(){try{DATA=await (await fetch('data/trips.json',{cache:'no-c
  const id=P.get('trip');id?trip(id):home();if('serviceWorker'in navigator)navigator.serviceWorker.register('/trips/sw.js',{scope:'/trips/'}).catch(()=>navigator.serviceWorker.register('sw.js'))}
 boot();
 
-const CFG='trips.webhook.v1',SCAN={msg:''};
-const cfg=()=>JSON.parse(localStorage.getItem(CFG)||'{}');
-function settings(){const c=cfg();const el=document.createElement('div');el.className='sheet';
- el.innerHTML=`<form id="sf"><b>Inbox scan settings</b><div class="su">Paste these from your Grok Bot routine. Stored on this device only.</div>
- <label>Webhook URL<input name="url" type="url" required value="${esc(c.url||'')}"></label><label>Sender key<input name="key" type="password" value="${esc(c.key||'')}"></label>
- <div class="row"><button class="btn pri">Save</button><button class="btn" type="button" id="sx">Cancel</button>${c.url?'<button class="btn" type="button" id="sc">Clear</button>':''}</div></form>`;
- document.body.appendChild(el);const close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};el.querySelector('#sx').onclick=close;
- el.querySelector('#sc')&&(el.querySelector('#sc').onclick=()=>{localStorage.removeItem(CFG);close();toast('Cleared')});
- el.querySelector('#sf').onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));localStorage.setItem(CFG,JSON.stringify({url:f.url.trim(),key:f.key.trim()}));close();toast('Saved')}}
+const SCAN={msg:''};
+const MAILTO='mailto:cheewee-bot+trips@mail.grokbot.com?subject='+encodeURIComponent('Check inbox')+'&body='+encodeURIComponent('Scan my Gmail for new bookings since the last scan.');
 const setSt=m=>{SCAN.msg=m;const el=$('#scanst');if(el)el.textContent=m};
-async function scan(){const c=cfg();if(!c.url){settings();return}
- const btn=$('#scan');btn&&(btn.disabled=true);setSt('Sending…');
- const body=JSON.stringify({source:'trips-app',requestedAt:new Date().toISOString()});
- const h={'Content-Type':'application/json'};if(c.key){h['Authorization']='Bearer '+c.key;h['X-Webhook-Key']=c.key;h['X-Sender-Key']=c.key}
- let ok=false;try{const r=await fetch(c.url,{method:'POST',mode:'cors',headers:h,body});if(!r.ok)throw new Error('HTTP '+r.status);ok=true}
- catch(e){if(e instanceof TypeError){try{await fetch(c.url+(c.url.includes('?')?'&':'?')+(c.key?'key='+encodeURIComponent(c.key):''),{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body});ok=true}catch(e2){setSt('Error: '+e2.message)}}else setSt('Error: '+e.message)}
- btn&&(btn.disabled=false);if(!ok)return;setSt('Scan started, new bookings appear in a few minutes');poll()}
+function scan(){location.href=MAILTO;setSt('Tap Send in your email app. Your trip updates within a few minutes.');poll()}
 async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterval(async()=>{n++;
  try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
