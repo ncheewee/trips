@@ -22,9 +22,9 @@ const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)
 function home(){applyTheme(null);const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
  const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${bgOf(t,'card')};--acc:${themeOf(t).accent}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn" id="inst">⤓ Install</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
+ app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
- $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;$('#inst').onclick=installHelp;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
+ $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
 function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  const m=[];if(it.start&&!it.allTrip)m.push();
@@ -95,7 +95,13 @@ async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterva
  try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
 
-let deferredInstall=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
+let deferredInstall=null,appInstalled=false;
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function syncInstall(){const b=document.getElementById('installApp'),h=document.getElementById('inst');const sa=isStandalone()||appInstalled;if(b)b.hidden=!deferredInstall||sa;if(h)h.hidden=sa}
+async function doInstall(){if(!deferredInstall)return;const p=deferredInstall;deferredInstall=null;p.prompt();try{await p.userChoice}catch{}syncInstall()}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;syncInstall()});
+addEventListener('appinstalled',()=>{appInstalled=true;deferredInstall=null;syncInstall()});
+matchMedia('(display-mode: standalone)').addEventListener?.('change',syncInstall);
 function installHelp(){const el=document.createElement('div');el.className='sheet';
  const ua=navigator.userAgent,android=/Android/i.test(ua),ios=/iPhone|iPad/i.test(ua),mac=/Macintosh/.test(ua)&&!/Chrome/.test(ua);
  const steps=[['Android · Chrome (Pixel)',`<ol><li>Tap <b>⋮</b> (top right) → <b>Install app</b> (or <b>Add to home screen</b> → <b>Install</b>).</li><li>If Chrome says it's already installed or shows <b>Open in app</b>, an old copy is on your phone: long-press the old <b>Trips</b> (or <b>2048</b>) icon → <b>App info</b> → <b>Uninstall</b>.</li><li>Then Chrome → <b>Settings</b> → <b>Site settings</b> → <b>All sites</b> → <b>ncheewee.github.io</b> → <b>Clear &amp; reset</b>, reopen this page and install again.</li></ol>`,android],

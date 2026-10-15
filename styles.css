@@ -52,3 +52,5 @@ body{background-image:radial-gradient(60vw 40vh at 100% -10%,color-mix(in srgb,v
 .sheet ol{padding-left:18px;margin:6px 0}.sheet form{max-height:85vh;overflow:auto}
 header{flex-wrap:wrap;gap:10px}header .row{flex-wrap:nowrap}header .btn{padding:8px 11px}
 .trip .pill{align-self:flex-start}
+
+.btn[hidden]{display:none}
