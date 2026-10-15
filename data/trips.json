@@ -6,9 +6,33 @@
       "destination": "Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "start": "2026-10-18",
-      "end": "2026-10-24",
+      "end": "2026-10-25",
       "emoji": "🗼",
       "items": [
+        {
+          "id": "sq632",
+          "type": "flight",
+          "title": "SQ 632 · Singapore → Tokyo Haneda",
+          "subtitle": "SIN T2 07:40 → HND T3 15:45 · Airbus A350-900 · Economy",
+          "start": "2026-10-18T07:40:00+08:00",
+          "tz": "Asia/Singapore",
+          "address": "Singapore Changi Airport Terminal 2",
+          "provider": "Singapore Airlines",
+          "confirmation": "FIDH79",
+          "emailUrl": "https://mail.google.com/mail/u/0/#all/1a14031104bdcc06"
+        },
+        {
+          "id": "sq632-arr",
+          "type": "flight",
+          "title": "Arrive Tokyo Haneda (SQ 632)",
+          "subtitle": "Haneda Airport Terminal 3",
+          "start": "2026-10-18T15:45:00+09:00",
+          "tz": "Asia/Tokyo",
+          "address": "Tokyo Haneda Airport Terminal 3",
+          "provider": "Singapore Airlines",
+          "confirmation": "FIDH79",
+          "emailUrl": "https://mail.google.com/mail/u/0/#all/1a14031104bdcc06"
+        },
         {
           "id": "newotani-in",
           "type": "hotel-checkin",
@@ -25,6 +49,14 @@
           "note": "Near Sanno Park Tower (work), ~10 min"
         },
         {
+          "id": "work-sanno",
+          "type": "place",
+          "title": "Sanno Park Tower (work)",
+          "subtitle": "Nearby · Akasaka / Tameike-Sanno",
+          "address": "Sanno Park Tower, 2-11-1 Nagatacho, Chiyoda-ku, Tokyo",
+          "allTrip": true
+        },
+        {
           "id": "newotani-out",
           "type": "hotel-checkout",
           "title": "Check out · Hotel New Otani Tokyo Garden Tower",
@@ -39,12 +71,28 @@
           "emailUrl": "https://mail.google.com/mail/u/0/#all/1a13f924eb0e72d7"
         },
         {
-          "id": "work-sanno",
-          "type": "place",
-          "title": "Sanno Park Tower (work)",
-          "subtitle": "Nearby · Akasaka / Tameike-Sanno",
-          "address": "Sanno Park Tower, 2-11-1 Nagatacho, Chiyoda-ku, Tokyo",
-          "allTrip": true
+          "id": "sq5901",
+          "type": "flight",
+          "title": "SQ 5901 · Tokyo Narita → Singapore",
+          "subtitle": "NRT T1 18:25 → SIN T2 00:45 (+1) · Boeing 787-9 · Economy · Operated by ANA",
+          "start": "2026-10-24T18:25:00+09:00",
+          "tz": "Asia/Tokyo",
+          "address": "Narita International Airport Terminal 1",
+          "provider": "Singapore Airlines",
+          "confirmation": "FIDH79",
+          "emailUrl": "https://mail.google.com/mail/u/0/#all/1a14031104bdcc06"
+        },
+        {
+          "id": "sq5901-arr",
+          "type": "flight",
+          "title": "Arrive Singapore (SQ 5901)",
+          "subtitle": "Changi Airport Terminal 2",
+          "start": "2026-10-25T00:45:00+08:00",
+          "tz": "Asia/Singapore",
+          "address": "Singapore Changi Airport Terminal 2",
+          "provider": "Singapore Airlines",
+          "confirmation": "FIDH79",
+          "emailUrl": "https://mail.google.com/mail/u/0/#all/1a14031104bdcc06"
         }
       ],
       "image": "img/tokyo",
