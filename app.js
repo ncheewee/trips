@@ -37,7 +37,7 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
  ${m.length?`<div class="meta">${m.join('')}</div>`:''}
- ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>`:''}
+ ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(mailHref(it.emailUrl))}">✉︎ Open booking email</a>`:''}
  ${!SHARE&&it._local?`<button class="btn" data-del="${it.id}" style="margin-top:8px">Remove</button>`:''}</div>`}
 function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>Trip not found. <a href="./">Home</a></p>';return}
  applyTheme(t);const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
@@ -82,6 +82,8 @@ async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterva
  try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
 
+const IS_ANDROID=/Android/i.test(navigator.userAgent);
+function mailHref(u){if(!IS_ANDROID||!/^https:\/\/mail\.google\.com\//.test(u))return u;return 'intent://'+u.replace(/^https:\/\//,'')+'#Intent;scheme=https;package=com.google.android.gm;S.browser_fallback_url='+encodeURIComponent(u)+';end'}
 let deferredInstall=null,appInstalled=false;
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 function syncInstall(){const b=document.getElementById('installApp'),h=document.getElementById('inst');const sa=isStandalone()||appInstalled;if(b)b.hidden=!deferredInstall||sa;if(h)h.hidden=sa}
