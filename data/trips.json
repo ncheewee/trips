@@ -21,7 +21,7 @@
           "phoneDisplay": "+81 3-3265-1111",
           "provider": "Booking.com",
           "confirmation": "3004480681999961204",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1879119406501360343",
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/1a13f924eb0e72d7",
           "note": "Near Sanno Park Tower (work), ~10 min"
         },
         {
@@ -36,7 +36,7 @@
           "phoneDisplay": "+81 3-3265-1111",
           "provider": "Booking.com",
           "confirmation": "3004480681999961204",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1879119406501360343"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/1a13f924eb0e72d7"
         },
         {
           "id": "work-sanno",
@@ -74,7 +74,7 @@
           "address": "Singapore Changi Airport Terminal 2",
           "provider": "Singapore Airlines",
           "confirmation": "FAS6GU",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1853675726862147141"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19b994409c61de45"
         },
         {
           "id": "sq616-arr",
@@ -86,7 +86,7 @@
           "address": "Gimhae International Airport, Busan",
           "provider": "Singapore Airlines",
           "confirmation": "FAS6GU",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1873395172325689249"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19ffa2fbca6787a1"
         },
         {
           "id": "abnb-busan-in",
@@ -100,7 +100,7 @@
           "phoneDisplay": "+82 10-4672-1518",
           "provider": "Airbnb",
           "confirmation": "HMCJ2AZMFB",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1867263835088664209"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19e9da909864b691"
         },
         {
           "id": "abnb-busan-out",
@@ -112,7 +112,7 @@
           "address": "Suyeong-gu, Busan, South Korea",
           "provider": "Airbnb",
           "confirmation": "HMCJ2AZMFB",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1867263835088664209"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19e9da909864b691"
         },
         {
           "id": "abnb-mangwon-in",
@@ -126,7 +126,7 @@
           "phoneDisplay": "+82 10-4322-9293",
           "provider": "Airbnb",
           "confirmation": "HM4JPH44PY",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869995637411908022"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19f38f1fe37789b6"
         },
         {
           "id": "car-pickup",
@@ -140,7 +140,7 @@
           "phoneDisplay": "+82 10 8274 8446",
           "provider": "Klook",
           "confirmation": "RGV934769",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1868011003155778176"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19ec821c379f0a80"
         },
         {
           "id": "abnb-mangwon-out",
@@ -152,7 +152,7 @@
           "address": "35-1 Mangwon-ro 3-gil, Mapo-gu, Seoul, South Korea",
           "provider": "Airbnb",
           "confirmation": "HM4JPH44PY",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869995637411908022"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19f38f1fe37789b6"
         },
         {
           "id": "gap-21-24",
@@ -161,7 +161,7 @@
           "subtitle": "High1 Mountain Condo enquiry (22–25 Dec) — bookings open from Oct 2026; no confirmation found",
           "start": "2026-12-21T12:00:00+09:00",
           "tz": "Asia/Seoul",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-a:r-4571972975734155943"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19b64b85c2d5538f"
         },
         {
           "id": "car-return",
@@ -175,7 +175,7 @@
           "phoneDisplay": "+82 10 8274 8446",
           "provider": "Klook",
           "confirmation": "RGV934769",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1868011003155778176"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19ec821c379f0a80"
         },
         {
           "id": "abnb-jongno-in",
@@ -189,7 +189,7 @@
           "phoneDisplay": "+82 10-3018-0041",
           "provider": "Airbnb",
           "confirmation": "HMENR4TYB9",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869994946031210114"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19f38e7ee9f74e82"
         },
         {
           "id": "abnb-jongno-out",
@@ -201,7 +201,7 @@
           "address": "33-14 Gyeonghuigung 1-gil, Jongno-gu, Seoul, South Korea",
           "provider": "Airbnb",
           "confirmation": "HMENR4TYB9",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869994946031210114"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19f38e7ee9f74e82"
         },
         {
           "id": "sq601",
@@ -213,7 +213,7 @@
           "address": "Incheon International Airport Terminal 1",
           "provider": "Singapore Airlines",
           "confirmation": "FAS6GU",
-          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1853675726862147141"
+          "emailUrl": "https://mail.google.com/mail/u/ncheewee@gmail.com/#all/19b994409c61de45"
         }
       ],
       "image": "img/korea",
