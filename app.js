@@ -5,6 +5,11 @@ const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearT
 const ICON={'hotel-checkin':'🛎','hotel-checkout':'🧳',flight:'✈️',event:'🎟',place:'📍',train:'🚄',food:'🍜'};
 const theme=localStorage.getItem('theme');if(theme)document.documentElement.dataset.theme=theme;
 let DATA={trips:[]};
+function hue(str){let h=0;for(const c of str)h=(h*31+c.charCodeAt(0))>>>0;return h%360}
+function themeOf(t){if(t.theme)return t.theme;const h=hue(t.id||t.title);return{accent:`hsl(${h} 85% 66%)`,accent2:`hsl(${(h+50)%360} 60% 38%)`,tint:`hsl(${(h+50)%360} 55% 22%)`,chip:`hsl(${h} 90% 88%)`}}
+const imgOf=(t,s)=>`${t.image||'img/travel'}-${s}.webp`;
+const bgOf=(t,s)=>{const th=themeOf(t);return `linear-gradient(180deg,rgba(0,0,0,.05) 0%,color-mix(in srgb,${th.tint} 55%,transparent) 55%,color-mix(in srgb,${th.tint} 92%,black) 100%),linear-gradient(135deg,color-mix(in srgb,${th.accent} 35%,transparent),transparent 60%),url('${imgOf(t,s)}') center/cover`};
+function applyTheme(t){const r=document.documentElement.style;if(!t){['--acc','--acc2','--chip','--tint'].forEach(k=>r.removeProperty(k));return}const th=themeOf(t);r.setProperty('--acc',th.accent);r.setProperty('--acc2',th.accent2);r.setProperty('--chip',th.chip);r.setProperty('--tint',th.tint)}
 const local=()=>JSON.parse(localStorage.getItem(LS)||'{}');const saveLocal=o=>localStorage.setItem(LS,JSON.stringify(o));
 const owner=()=>JSON.parse(localStorage.getItem(OWN)||'{}');
 function merged(){const l=local();return DATA.trips.map(t=>({...t,items:[...t.items,...(l[t.id]||[])]}))}
@@ -14,12 +19,12 @@ const fmtTime=(iso,tz)=>new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit'
 function rel(t){const today=dayKey(new Date().toISOString(),t.timezone);const d=(a,b)=>Math.round((new Date(a)-new Date(b))/864e5);
  if(today<t.start){const n=d(t.start,today);return n===1?'Tomorrow':`In ${n} days`}if(today>t.end){return 'Completed'}return `Day ${d(today,t.start)+1} of ${d(t.end,t.start)+1}`}
 const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)} ${a.d} – ${b.w.slice(0,3)} ${b.d}`};
-function home(){const ts=merged(),today=new Date().toISOString().slice(0,10);
+function home(){applyTheme(null);const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
- const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${t.cover}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
+ const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${bgOf(t,'card')};--acc:${themeOf(t).accent}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
+ app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn" id="inst">⤓ Install</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
- $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
+ $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;$('#inst').onclick=installHelp;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
 function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  const m=[];if(it.start&&!it.allTrip)m.push();
@@ -35,12 +40,12 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  ${!SHARE&&it.emailUrl?`<a class="btn pri email" target="_blank" rel="noopener" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>`:''}
  ${!SHARE&&it._local?`<button class="btn" data-del="${it.id}" style="margin-top:8px">Remove</button>`:''}</div>`}
 function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>Trip not found. <a href="./">Home</a></p>';return}
- const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
+ applyTheme(t);const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
  const days=[];for(let d=new Date(t.start+'T00:00:00Z');d<=new Date(t.end+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+1))days.push(d.toISOString().slice(0,10));
  Object.keys(groups).forEach(k=>{if(!days.includes(k))days.push(k)});days.sort();
  const today=dayKey(new Date().toISOString(),t.timezone);
  app.innerHTML=`<header>${SHARE?'<span></span>':'<a class="btn" href="./">‹ Trips</a>'}<div class="row"><button class="btn" id="ics">📅 Calendar</button><button class="btn" id="sh">↗ Share</button></div></header>
- <div class="hero" style="background:${t.cover}"><div style="font-size:40px">${t.emoji||''}</div><div class="t">${esc(t.title)}</div><div>${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></div>
+ <div class="hero" style="background:${bgOf(t,'hero')}"><div style="font-size:40px">${t.emoji||''}</div><div class="t">${esc(t.title)}</div><div>${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></div>
  ${SHARE?'<div class="sharebar">Shared itinerary · read-only</div>':''}
  ${all.length?`<div class="day"><div class="dh"><b>Key places</b></div>${all.map(i=>itemHTML(i,t)).join('')}</div>`:''}
  ${days.map(k=>{const f=fmtDay(k),its=(groups[k]||[]).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day ${k===today?'today':''}" ${k===today?'id="now"':''}><div class="dh"><b>${f.w}</b><span>${f.d}</span></div>${its.length?its.map(i=>itemHTML(i,t)).join(''):'<div class="item" style="opacity:.55"><span class="dot">·</span><div class="su">Free day</div></div>'}</div>`}).join('')}
@@ -89,3 +94,15 @@ async function scan(){const c=cfg();if(!c.url){settings();return}
 async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterval(async()=>{n++;
  try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
+
+let deferredInstall=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
+function installHelp(){const el=document.createElement('div');el.className='sheet';
+ const ua=navigator.userAgent,android=/Android/i.test(ua),ios=/iPhone|iPad/i.test(ua),mac=/Macintosh/.test(ua)&&!/Chrome/.test(ua);
+ const steps=[['Android · Chrome (Pixel)',`<ol><li>Tap <b>⋮</b> (top right) → <b>Install app</b> (or <b>Add to home screen</b> → <b>Install</b>).</li><li>If Chrome says it's already installed or shows <b>Open in app</b>, an old copy is on your phone: long-press the old <b>Trips</b> (or <b>2048</b>) icon → <b>App info</b> → <b>Uninstall</b>.</li><li>Then Chrome → <b>Settings</b> → <b>Site settings</b> → <b>All sites</b> → <b>ncheewee.github.io</b> → <b>Clear &amp; reset</b>, reopen this page and install again.</li></ol>`,android],
+ ['iPhone · Safari','<ol><li>Tap <b>Share</b> → <b>Add to Home Screen</b> → <b>Add</b>.</li></ol>',ios],
+ ['Mac · Safari','<ol><li><b>File</b> → <b>Add to Dock…</b></li></ol>',mac],
+ ['Chrome · desktop','<ol><li>Click the install icon in the address bar, or <b>⋮</b> → <b>Cast, save and share</b> → <b>Install page as app…</b></li></ol>',false]];
+ steps.sort((a,b)=>(b[2]?1:0)-(a[2]?1:0));
+ el.innerHTML=`<form><b>Install Trips</b>${deferredInstall?'<button class="btn pri" type="button" id="ip">Install now</button>':''}${steps.map(([h,b])=>`<div><div class="ti">${h}</div><div class="su">${b}</div></div>`).join('')}<button class="btn" type="button" id="ix">Close</button></form>`;
+ document.body.appendChild(el);el.onclick=e=>{if(e.target===el)el.remove()};el.querySelector('#ix').onclick=()=>el.remove();
+ el.querySelector('#ip')&&(el.querySelector('#ip').onclick=async()=>{deferredInstall.prompt();await deferredInstall.userChoice.catch(()=>{});deferredInstall=null;el.remove()})}

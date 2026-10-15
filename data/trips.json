@@ -7,7 +7,6 @@
       "timezone": "Asia/Tokyo",
       "start": "2026-10-18",
       "end": "2026-10-24",
-      "cover": "linear-gradient(135deg,#ff6b8b 0%,#7b5cff 55%,#1fb6ff 100%)",
       "emoji": "🗼",
       "items": [
         {
@@ -47,7 +46,14 @@
           "address": "Sanno Park Tower, 2-11-1 Nagatacho, Chiyoda-ku, Tokyo",
           "allTrip": true
         }
-      ]
+      ],
+      "image": "img/tokyo",
+      "theme": {
+        "accent": "#ff7aa8",
+        "accent2": "#3b2a8f",
+        "tint": "#2a1f6b",
+        "chip": "#ffd1e3"
+      }
     },
     {
       "id": "korea-dec-2026",
@@ -56,7 +62,6 @@
       "timezone": "Asia/Seoul",
       "start": "2026-12-13",
       "end": "2026-12-27",
-      "cover": "linear-gradient(135deg,#1fb6ff 0%,#4f5bd5 50%,#ff5e7e 100%)",
       "emoji": "🇰🇷",
       "items": [
         {
@@ -210,7 +215,14 @@
           "confirmation": "FAS6GU",
           "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1853675726862147141"
         }
-      ]
+      ],
+      "image": "img/korea",
+      "theme": {
+        "accent": "#ff7a5c",
+        "accent2": "#0f8f84",
+        "tint": "#0b4f4a",
+        "chip": "#bff0e6"
+      }
     }
   ]
 }
