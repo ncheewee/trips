@@ -48,6 +48,169 @@
           "allTrip": true
         }
       ]
+    },
+    {
+      "id": "korea-dec-2026",
+      "title": "Korea, Dec 2026",
+      "destination": "Busan · Seoul, South Korea",
+      "timezone": "Asia/Seoul",
+      "start": "2026-12-13",
+      "end": "2026-12-27",
+      "cover": "linear-gradient(135deg,#1fb6ff 0%,#4f5bd5 50%,#ff5e7e 100%)",
+      "emoji": "🇰🇷",
+      "items": [
+        {
+          "id": "sq616",
+          "type": "flight",
+          "title": "SQ 616 · Singapore → Busan",
+          "subtitle": "SIN T2 23:25 → PUS Gimhae 06:45 (+1) · Boeing 737 MAX 8 · 4 pax · Revised from 23:30",
+          "start": "2026-12-13T23:25:00+08:00",
+          "tz": "Asia/Singapore",
+          "address": "Singapore Changi Airport Terminal 2",
+          "provider": "Singapore Airlines",
+          "confirmation": "FAS6GU",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1853675726862147141"
+        },
+        {
+          "id": "sq616-arr",
+          "type": "flight",
+          "title": "Arrive Busan Gimhae (SQ 616)",
+          "subtitle": "Gimhae International Airport",
+          "start": "2026-12-14T06:45:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "Gimhae International Airport, Busan",
+          "provider": "Singapore Airlines",
+          "confirmation": "FAS6GU",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1873395172325689249"
+        },
+        {
+          "id": "abnb-busan-in",
+          "type": "hotel-checkin",
+          "title": "Check in · Ocean-view pool villa, Gwangalli (Airbnb)",
+          "subtitle": "Host: The Vibe Gwangan · after 15:00 · self check-in keypad",
+          "start": "2026-12-14T15:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "Suyeong-gu, Busan, South Korea",
+          "phone": "+821046721518",
+          "phoneDisplay": "+82 10-4672-1518",
+          "provider": "Airbnb",
+          "confirmation": "HMCJ2AZMFB",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1867263835088664209"
+        },
+        {
+          "id": "abnb-busan-out",
+          "type": "hotel-checkout",
+          "title": "Check out · Gwangalli villa",
+          "subtitle": "By 11:00",
+          "start": "2026-12-18T11:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "Suyeong-gu, Busan, South Korea",
+          "provider": "Airbnb",
+          "confirmation": "HMCJ2AZMFB",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1867263835088664209"
+        },
+        {
+          "id": "abnb-mangwon-in",
+          "type": "hotel-checkin",
+          "title": "Check in · Mangwon suite, Mapo (Airbnb)",
+          "subtitle": "Host: Tobey · after 16:00 · near Hongdae / Mangwon Market",
+          "start": "2026-12-18T16:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "35-1 Mangwon-ro 3-gil, Mapo-gu, Seoul, South Korea",
+          "phone": "+821043229293",
+          "phoneDisplay": "+82 10-4322-9293",
+          "provider": "Airbnb",
+          "confirmation": "HM4JPH44PY",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869995637411908022"
+        },
+        {
+          "id": "car-pickup",
+          "type": "event",
+          "title": "Pick up car · Hyundai Santa Fe (Mobilicar)",
+          "subtitle": "Klook car rental · store hours 09:00–19:00 · bring licence/IDP, ID, card, voucher",
+          "start": "2026-12-20T18:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "114ho, 38 Seosomun-ro, Jung District, Seoul",
+          "phone": "+821082748446",
+          "phoneDisplay": "+82 10 8274 8446",
+          "provider": "Klook",
+          "confirmation": "RGV934769",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1868011003155778176"
+        },
+        {
+          "id": "abnb-mangwon-out",
+          "type": "hotel-checkout",
+          "title": "Check out · Mangwon suite",
+          "subtitle": "By 11:00",
+          "start": "2026-12-21T11:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "35-1 Mangwon-ro 3-gil, Mapo-gu, Seoul, South Korea",
+          "provider": "Airbnb",
+          "confirmation": "HM4JPH44PY",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869995637411908022"
+        },
+        {
+          "id": "gap-21-24",
+          "type": "place",
+          "title": "21–24 Dec: stay not booked yet",
+          "subtitle": "High1 Mountain Condo enquiry (22–25 Dec) — bookings open from Oct 2026; no confirmation found",
+          "start": "2026-12-21T12:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-a:r-4571972975734155943"
+        },
+        {
+          "id": "car-return",
+          "type": "event",
+          "title": "Return car · Mobilicar",
+          "subtitle": "Drop-off 18:00",
+          "start": "2026-12-24T18:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "114ho, 38 Seosomun-ro, Jung District, Seoul",
+          "phone": "+821082748446",
+          "phoneDisplay": "+82 10 8274 8446",
+          "provider": "Klook",
+          "confirmation": "RGV934769",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1868011003155778176"
+        },
+        {
+          "id": "abnb-jongno-in",
+          "type": "hotel-checkin",
+          "title": "Check in · 2BR residence near Gyeongbokgung (Airbnb)",
+          "subtitle": "Host: 다이애나 반 · after 16:00",
+          "start": "2026-12-24T16:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "33-14 Gyeonghuigung 1-gil, Jongno-gu, Seoul, South Korea",
+          "phone": "+821030180041",
+          "phoneDisplay": "+82 10-3018-0041",
+          "provider": "Airbnb",
+          "confirmation": "HMENR4TYB9",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869994946031210114"
+        },
+        {
+          "id": "abnb-jongno-out",
+          "type": "hotel-checkout",
+          "title": "Check out · Jongno residence",
+          "subtitle": "By 11:00",
+          "start": "2026-12-27T11:00:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "33-14 Gyeonghuigung 1-gil, Jongno-gu, Seoul, South Korea",
+          "provider": "Airbnb",
+          "confirmation": "HMENR4TYB9",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1869994946031210114"
+        },
+        {
+          "id": "sq601",
+          "type": "flight",
+          "title": "SQ 601 · Seoul Incheon → Singapore",
+          "subtitle": "ICN T1 16:55 → SIN 22:30 · Boeing 787 · 4 pax",
+          "start": "2026-12-27T16:55:00+09:00",
+          "tz": "Asia/Seoul",
+          "address": "Incheon International Airport Terminal 1",
+          "provider": "Singapore Airlines",
+          "confirmation": "FAS6GU",
+          "emailUrl": "https://mail.google.com/mail/?authuser=ncheewee@gmail.com#all/thread-f:1853675726862147141"
+        }
+      ]
     }
   ]
 }

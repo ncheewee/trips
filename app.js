@@ -10,16 +10,16 @@ const owner=()=>JSON.parse(localStorage.getItem(OWN)||'{}');
 function merged(){const l=local();return DATA.trips.map(t=>({...t,items:[...t.items,...(l[t.id]||[])]}))}
 const dayKey=(iso,tz)=>new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
 const fmtDay=(k)=>{const d=new Date(k+'T12:00:00Z');return{w:d.toLocaleDateString('en-GB',{weekday:'long',timeZone:'UTC'}),d:d.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'})}};
-const fmtTime=(iso,tz)=>new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:tz})+' '+(tz==='Asia/Tokyo'?'JST':tz==='Asia/Singapore'?'SGT':'');
+const fmtTime=(iso,tz)=>new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:tz})+' '+(({'Asia/Tokyo':'JST','Asia/Seoul':'KST','Asia/Singapore':'SGT'}[tz]||''));
 function rel(t){const today=dayKey(new Date().toISOString(),t.timezone);const d=(a,b)=>Math.round((new Date(a)-new Date(b))/864e5);
  if(today<t.start){const n=d(t.start,today);return n===1?'Tomorrow':`In ${n} days`}if(today>t.end){return 'Completed'}return `Day ${d(today,t.start)+1} of ${d(t.end,t.start)+1}`}
 const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)} ${a.d} – ${b.w.slice(0,3)} ${b.d}`};
 function home(){const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
  const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${t.cover}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><button class="btn" id="th">◐</button></header>
+ app.innerHTML=`<header><h1>Trips</h1><div class="row"><button class="btn pri" id="scan">📥 Check inbox</button><button class="btn" id="set" aria-label="Settings">⚙︎</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
- $('#th').onclick=toggleTheme}
+ $('#th').onclick=toggleTheme;$('#scan').onclick=scan;$('#set').onclick=settings;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
 function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  const m=[];if(it.start&&!it.allTrip)m.push();
@@ -56,7 +56,7 @@ function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="typ
  <label>Title<input name="title" required></label><label>Details<input name="subtitle"></label><label>Date & time (${t.timezone})<input type="datetime-local" name="dt" required></label>
  <label>Address<input name="address"></label><label>Phone<input name="phone"></label><label>Confirmation #<input name="confirmation"></label><label>Booking email link<input name="emailUrl" placeholder="https://mail.google.com/..."></label>
  <label>🔒 Private notes (this device only — PINs etc.)<textarea name="notes"></textarea></label><button class="btn pri">Save</button></form>`;
- $('#f').onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const off=t.timezone==='Asia/Tokyo'?'+09:00':'+08:00';
+ $('#f').onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const off=t.timezone==='Asia/Singapore'?'+08:00':'+09:00';
   const it={id:'l'+Date.now(),_local:true,type:f.type,title:f.title,subtitle:f.subtitle,start:f.dt+':00'+off,tz:t.timezone,address:f.address,phone:f.phone,confirmation:f.confirmation,emailUrl:f.emailUrl};
   Object.keys(it).forEach(k=>it[k]===''&&delete it[k]);const l=local();(l[t.id]=l[t.id]||[]).push(it);saveLocal(l);
   if(f.notes){const o=owner();o[it.id]={notes:f.notes};localStorage.setItem(OWN,JSON.stringify(o))}toast('Saved');trip(t.id)}}
@@ -66,5 +66,26 @@ function ics(t){const s=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace
  const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trips//EN',all,...ev,'END:VCALENDAR'].join('\r\n');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download=t.id+'.ics';a.click()}
 async function boot(){try{DATA=await (await fetch('data/trips.json',{cache:'no-cache'})).json()}catch(e){}
- const id=P.get('trip');id?trip(id):home();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js')}
+ const id=P.get('trip');id?trip(id):home();if('serviceWorker'in navigator)navigator.serviceWorker.register('/trips/sw.js',{scope:'/trips/'}).catch(()=>navigator.serviceWorker.register('sw.js'))}
 boot();
+
+const CFG='trips.webhook.v1',SCAN={msg:''};
+const cfg=()=>JSON.parse(localStorage.getItem(CFG)||'{}');
+function settings(){const c=cfg();const el=document.createElement('div');el.className='sheet';
+ el.innerHTML=`<form id="sf"><b>Inbox scan settings</b><div class="su">Paste these from your Grok Bot routine. Stored on this device only.</div>
+ <label>Webhook URL<input name="url" type="url" required value="${esc(c.url||'')}"></label><label>Sender key<input name="key" type="password" value="${esc(c.key||'')}"></label>
+ <div class="row"><button class="btn pri">Save</button><button class="btn" type="button" id="sx">Cancel</button>${c.url?'<button class="btn" type="button" id="sc">Clear</button>':''}</div></form>`;
+ document.body.appendChild(el);const close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};el.querySelector('#sx').onclick=close;
+ el.querySelector('#sc')&&(el.querySelector('#sc').onclick=()=>{localStorage.removeItem(CFG);close();toast('Cleared')});
+ el.querySelector('#sf').onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));localStorage.setItem(CFG,JSON.stringify({url:f.url.trim(),key:f.key.trim()}));close();toast('Saved')}}
+const setSt=m=>{SCAN.msg=m;const el=$('#scanst');if(el)el.textContent=m};
+async function scan(){const c=cfg();if(!c.url){settings();return}
+ const btn=$('#scan');btn&&(btn.disabled=true);setSt('Sending…');
+ const body=JSON.stringify({source:'trips-app',requestedAt:new Date().toISOString()});
+ const h={'Content-Type':'application/json'};if(c.key){h['Authorization']='Bearer '+c.key;h['X-Webhook-Key']=c.key;h['X-Sender-Key']=c.key}
+ let ok=false;try{const r=await fetch(c.url,{method:'POST',mode:'cors',headers:h,body});if(!r.ok)throw new Error('HTTP '+r.status);ok=true}
+ catch(e){if(e instanceof TypeError){try{await fetch(c.url+(c.url.includes('?')?'&':'?')+(c.key?'key='+encodeURIComponent(c.key):''),{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body});ok=true}catch(e2){setSt('Error: '+e2.message)}}else setSt('Error: '+e.message)}
+ btn&&(btn.disabled=false);if(!ok)return;setSt('Scan started, new bookings appear in a few minutes');poll()}
+async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterval(async()=>{n++;
+ try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
+ if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
