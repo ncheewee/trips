@@ -25,5 +25,5 @@
    "purpose": "maskable"
   }
  ],
- "id": "/trips/"
+ "id": "/trips/?app=trips-v4"
 }
