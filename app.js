@@ -37,7 +37,7 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
  ${m.length?`<div class="meta">${m.join('')}</div>`:''}
- ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>${IS_ANDROID?`<a class="weblink" href="#" data-gm="${esc(gmTerm(it))}" data-conf="${it.confirmation?1:''}">Open Gmail app</a>`:''}`:''}
+ ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>${it.findUrl?`<a class="weblink" href="${esc(it.findUrl)}">Find email</a>`:''}${IS_ANDROID?`<a class="weblink" href="#" data-gm="${esc(gmTerm(it))}" data-conf="${it.confirmation?1:''}">Open Gmail app</a>`:''}`:''}
  ${!SHARE&&it._local?`<button class="btn" data-del="${it.id}" style="margin-top:8px">Remove</button>`:''}</div>`}
 function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>Trip not found. <a href="./">Home</a></p>';return}
  applyTheme(t);const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
