@@ -54,3 +54,5 @@ header{flex-wrap:wrap;gap:10px}header .row{flex-wrap:nowrap}header .btn{padding:
 .trip .pill{align-self:flex-start}
 
 .btn[hidden]{display:none}
+
+.weblink{display:block;text-align:center;margin-top:8px;font-size:13px;color:var(--fg);opacity:.7;text-decoration:underline}

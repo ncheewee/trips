@@ -37,7 +37,7 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
  <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
  ${m.length?`<div class="meta">${m.join('')}</div>`:''}
- ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(mailHref(it.emailUrl))}">✉︎ Open booking email</a>`:''}
+ ${!SHARE&&it.emailUrl?`${IS_ANDROID?`<button class="btn pri email" type="button" data-gm="${esc(gmTerm(it))}" data-conf="${it.confirmation?1:''}">✉︎ Open in Gmail app</button><a class="weblink" href="${esc(it.emailUrl)}">Open in browser</a>`:`<a class="btn pri email" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>`}`:''}
  ${!SHARE&&it._local?`<button class="btn" data-del="${it.id}" style="margin-top:8px">Remove</button>`:''}</div>`}
 function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>Trip not found. <a href="./">Home</a></p>';return}
  applyTheme(t);const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
@@ -83,7 +83,11 @@ async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterva
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
 
 const IS_ANDROID=/Android/i.test(navigator.userAgent);
-function mailHref(u){if(!IS_ANDROID||!/^https:\/\/mail\.google\.com\//.test(u))return u;return 'intent://'+u.replace(/^https:\/\//,'')+'#Intent;scheme=https;package=com.google.android.gm;S.browser_fallback_url='+encodeURIComponent(u)+';end'}
+function gmTerm(it){if(it.confirmation)return String(it.confirmation);return String(it.title||'').replace(/^(Check in|Check out|Arrive[^·]*)\s*·\s*/i,'').replace(/\s*·.*$/,'').trim()||String(it.title||'')}
+const GM_INTENT='intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.gm;end';
+document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-gm]');if(!b)return;e.preventDefault();const term=b.dataset.gm;
+ try{await navigator.clipboard.writeText(term)}catch(_){}
+ toast(b.dataset.conf?'Confirmation # copied, paste it in Gmail search':'"'+term+'" copied, paste it in Gmail search');setTimeout(()=>{location.href=GM_INTENT},600)});
 let deferredInstall=null,appInstalled=false;
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 function syncInstall(){const b=document.getElementById('installApp'),h=document.getElementById('inst');const sa=isStandalone()||appInstalled;if(b)b.hidden=!deferredInstall||sa;if(h)h.hidden=sa}
