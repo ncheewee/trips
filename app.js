@@ -50,11 +50,11 @@ function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>T
  ${SHARE?'<div class="sharebar">Shared itinerary · read-only</div>':''}
  ${all.length?`<div class="day"><div class="dh"><b>Key places</b></div>${all.map(i=>itemHTML(i,t)).join('')}</div>`:''}
  ${days.map(k=>{const f=fmtDay(k),its=(groups[k]||[]).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day ${k===today?'today':''}" ${k===today?'id="now"':''}><div class="dh"><b>${f.w}</b><span>${f.d}</span></div>${its.length?its.map(i=>itemHTML(i,t)).join(''):'<div class="item" style="opacity:.55"><span class="dot">·</span><div class="su">Free day</div></div>'}</div>`}).join('')}
- ${SHARE?'':`<div class="row" style="margin-top:24px"><button class="btn" id="add">＋ Add item</button><button class="btn" id="exp">⇩ Export JSON</button></div><div id="form"></div>`}`;
+ ${SHARE?'':packHTML(t)}${SHARE?'':`<div class="row" style="margin-top:24px"><button class="btn" id="add">＋ Add item</button><button class="btn" id="exp">⇩ Export JSON</button></div><div id="form"></div>`}`;
  $('#now')?.scrollIntoView({behavior:'smooth',block:'start'});
  app.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const l=local();l[t.id]=(l[t.id]||[]).filter(i=>i.id!==b.dataset.del);saveLocal(l);trip(id)});
  $('#sh').onclick=async()=>{const url=location.origin+location.pathname+`?trip=${t.id}&view=share`;if(navigator.share){try{await navigator.share({title:t.title,text:`My itinerary: ${t.title}`,url})}catch(e){}}else{await navigator.clipboard.writeText(url);toast('Share link copied')}};
- $('#ics').onclick=()=>ics(t);
+ $('#ics').onclick=()=>ics(t);if(!SHARE)bindPack(t);
  if(!SHARE){$('#add').onclick=()=>form(t);$('#exp').onclick=()=>{const l=local();const out={trips:DATA.trips.map(x=>({...x,items:[...x.items,...(l[x.id]||[]).map(({_local,...r})=>r)]}))};
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));a.download='trips.json';a.click()}}}
 function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="type"><option value="event">Event</option><option value="flight">Flight</option><option value="hotel-checkin">Hotel check-in</option><option value="hotel-checkout">Hotel check-out</option><option value="train">Train</option><option value="food">Food</option><option value="place">Place</option></select></label>
@@ -95,6 +95,21 @@ function privMenu(){const el=document.createElement('div');el.className='sheet';
  el.querySelector('#pc')&&(el.querySelector('#pc').onclick=()=>{localStorage.removeItem(PRIV);close();toast('Private details cleared');rerender()});
  el.querySelector('#pf').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);let txt=fd.get('j');const f=fd.get('f');if(f&&f.size)txt=await f.text();
   try{const j=JSON.parse(txt);if(!j||typeof j.items!=='object')throw 0;localStorage.setItem(PRIV,JSON.stringify(j));close();toast('Imported '+Object.keys(j.items).length+' bookings');rerender()}catch(_){toast('Not valid private-details JSON')}}}
+const PK='trips.pack.v1';const packAll=()=>{try{return JSON.parse(localStorage.getItem(PK)||'{}')}catch(e){return{}}};
+const packOf=id=>{const a=packAll();return Object.assign({ticks:{},added:[],removed:[]},a[id]||{})};
+const savePack=(id,p)=>{const a=packAll();a[id]=p;localStorage.setItem(PK,JSON.stringify(a))};
+function packSections(t){const p=packOf(t.id),secs=(t.packing||[]).map(s=>({section:s.section,items:s.items.filter(i=>!p.removed.includes(i.id))}));
+ p.added.forEach(i=>{let s=secs.find(x=>x.section===i.section);if(!s)secs.push(s={section:i.section,items:[]});s.items.push(i)});return{p,secs}}
+function packHTML(t){const{p,secs}=packSections(t);const all=secs.flatMap(s=>s.items),done=all.filter(i=>p.ticks[i.id]).length;
+ return `<div class="day pack" id="pack"><div class="dh"><b>🧳 Packing</b><span id="pkc">${done}/${all.length}</span></div>
+ ${secs.map(s=>`<div class="pks"><div class="pkh">${esc(s.section)}</div>${s.items.map(i=>`<label class="pki${p.ticks[i.id]?' on':''}"><input type="checkbox" data-pk="${esc(i.id)}" ${p.ticks[i.id]?'checked':''}><span>${esc(i.text)}</span><button type="button" class="pkx" data-pkx="${esc(i.id)}" aria-label="Remove">×</button></label>`).join('')}</div>`).join('')}
+ <form class="pkadd" id="pkf"><select name="s">${[...new Set([...secs.map(s=>s.section),'Other'])].map(x=>`<option>${esc(x)}</option>`).join('')}</select><input name="x" placeholder="Add item" required><button class="btn pri">Add</button></form></div>`}
+function bindPack(t){const box=$('#pack');if(!box)return;
+ box.addEventListener('change',e=>{const c=e.target.closest('[data-pk]');if(!c)return;const p=packOf(t.id);if(c.checked)p.ticks[c.dataset.pk]=1;else delete p.ticks[c.dataset.pk];savePack(t.id,p);c.parentElement.classList.toggle('on',c.checked);
+  const{secs}=packSections(t);const all=secs.flatMap(s=>s.items);$('#pkc').textContent=all.filter(i=>p.ticks[i.id]).length+'/'+all.length});
+ box.addEventListener('click',e=>{const x=e.target.closest('[data-pkx]');if(!x)return;e.preventDefault();const id=x.dataset.pkx,p=packOf(t.id);
+  if(p.added.some(i=>i.id===id))p.added=p.added.filter(i=>i.id!==id);else p.removed.push(id);delete p.ticks[id];savePack(t.id,p);box.outerHTML=packHTML(t);bindPack(t)});
+ $('#pkf').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),p=packOf(t.id);p.added.push({id:'u'+Date.now(),section:f.get('s'),text:String(f.get('x')).trim()});savePack(t.id,p);box.outerHTML=packHTML(t);bindPack(t);$('#pkf [name=x]').focus()}}
 function rerender(){const id=P.get('trip');id?trip(id):home()}
 let deferredInstall=null,appInstalled=false;
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;

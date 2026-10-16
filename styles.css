@@ -61,3 +61,9 @@ header{flex-wrap:wrap;gap:10px}header .row{flex-wrap:nowrap}header .btn{padding:
 .ck{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap}.cv{font-size:14px;word-break:break-word}.cv a{color:inherit}
 .cp{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 12px;font:600 12px inherit;font-family:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .cp:active{transform:scale(.94)}.cp.done{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border-color:transparent}
+.pks{background:var(--card);border:1px solid color-mix(in srgb,var(--acc) 18%,var(--line));border-radius:18px;padding:10px 14px;margin:0 0 10px}
+.pkh{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--acc);margin:4px 0 6px}
+.pki{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:15px;cursor:pointer}.pki:first-of-type{border-top:0}
+.pki input{width:20px;height:20px;accent-color:var(--acc);flex:none}.pki span{flex:1}.pki.on span{text-decoration:line-through;color:var(--mut)}
+.pkx{border:0;background:none;color:var(--mut);font-size:20px;cursor:pointer;padding:0 4px}
+.pkadd{display:flex;gap:8px;margin-top:4px}.pkadd input,.pkadd select{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:9px;font:inherit}.pkadd select{flex:0 1 38%}

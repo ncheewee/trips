@@ -181,7 +181,138 @@
     "accent2": "#3b2a8f",
     "tint": "#2a1f6b",
     "chip": "#ffd1e3"
-   }
+   },
+   "packing": [
+    {
+     "section": "Documents",
+     "items": [
+      {
+       "id": "docume-passport",
+       "text": "Passport"
+      },
+      {
+       "id": "docume-visit-japan-web-qr-codes",
+       "text": "Visit Japan Web QR codes"
+      },
+      {
+       "id": "docume-flight-details-sq-632-sq",
+       "text": "Flight details (SQ 632 / SQ 5901)"
+      },
+      {
+       "id": "docume-new-otani-confirmation",
+       "text": "New Otani confirmation"
+      },
+      {
+       "id": "docume-yen-cash",
+       "text": "Yen cash"
+      },
+      {
+       "id": "docume-suica-card-or-suica-in-g",
+       "text": "Suica card or Suica in Google Wallet"
+      },
+      {
+       "id": "docume-maribank-card",
+       "text": "MariBank card"
+      }
+     ]
+    },
+    {
+     "section": "Work",
+     "items": [
+      {
+       "id": "work-laptop-and-charger",
+       "text": "Laptop and charger"
+      },
+      {
+       "id": "work-mouse",
+       "text": "Mouse"
+      },
+      {
+       "id": "work-work-badge",
+       "text": "Work badge"
+      },
+      {
+       "id": "work-business-cards",
+       "text": "Business cards"
+      },
+      {
+       "id": "work-type-a-plug-adapter",
+       "text": "Type A plug adapter"
+      },
+      {
+       "id": "work-power-bank",
+       "text": "Power bank"
+      }
+     ]
+    },
+    {
+     "section": "Clothes",
+     "items": [
+      {
+       "id": "clothe-4-5-work-shirts",
+       "text": "4–5 work shirts"
+      },
+      {
+       "id": "clothe-2-pairs-of-trousers",
+       "text": "2 pairs of trousers"
+      },
+      {
+       "id": "clothe-blazer",
+       "text": "Blazer"
+      },
+      {
+       "id": "clothe-light-jacket-or-trench-c",
+       "text": "Light jacket or trench coat"
+      },
+      {
+       "id": "clothe-compact-umbrella",
+       "text": "Compact umbrella"
+      },
+      {
+       "id": "clothe-walking-shoes",
+       "text": "Walking shoes"
+      },
+      {
+       "id": "clothe-office-shoes",
+       "text": "Office shoes"
+      },
+      {
+       "id": "clothe-gym-kit",
+       "text": "Gym kit"
+      }
+     ]
+    },
+    {
+     "section": "Toiletries and health",
+     "items": [
+      {
+       "id": "toilet-toiletries",
+       "text": "Toiletries"
+      },
+      {
+       "id": "toilet-medication-in-its-origin",
+       "text": "Medication in its original packaging"
+      }
+     ]
+    },
+    {
+     "section": "Before you go",
+     "items": [
+      {
+       "id": "before-check-in-for-sq-632-and-",
+       "text": "Check in for SQ 632 and pick a seat"
+      },
+      {
+       "id": "before-esim-or-roaming",
+       "text": "eSIM or roaming"
+      },
+      {
+       "id": "before-book-omakase-dinner",
+       "text": "Book omakase dinner"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "korea-dec-2026",
