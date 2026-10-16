@@ -18,10 +18,32 @@
      "tz": "Asia/Singapore",
      "address": "Singapore Changi Airport Terminal 2",
      "provider": "Singapore Airlines",
-     "confirmation": "FIDH79",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a14031104bdcc06",
-     "messageId": "SEYPR04MB9018D9969069C80397B80639A79C2@SEYPR04MB9018.apcprd04.prod.outlook.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ASEYPR04MB9018D9969069C80397B80639A79C2%40SEYPR04MB9018.apcprd04.prod.outlook.com"
+     "card": [
+      [
+       "Departs",
+       "Sun 18 Oct · 07:40 SGT"
+      ],
+      [
+       "From",
+       "Singapore Changi (SIN) · Terminal 2"
+      ],
+      [
+       "Arrives",
+       "Sun 18 Oct · 15:45 JST"
+      ],
+      [
+       "To",
+       "Tokyo Haneda (HND) · Terminal 3"
+      ],
+      [
+       "Seat",
+       "Not assigned yet"
+      ],
+      [
+       "Class",
+       "Economy"
+      ]
+     ]
     },
     {
      "id": "sq632-arr",
@@ -32,10 +54,16 @@
      "tz": "Asia/Tokyo",
      "address": "Tokyo Haneda Airport Terminal 3",
      "provider": "Singapore Airlines",
-     "confirmation": "FIDH79",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a14031104bdcc06",
-     "messageId": "SEYPR04MB9018D9969069C80397B80639A79C2@SEYPR04MB9018.apcprd04.prod.outlook.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ASEYPR04MB9018D9969069C80397B80639A79C2%40SEYPR04MB9018.apcprd04.prod.outlook.com"
+     "card": [
+      [
+       "Arrives",
+       "Sun 18 Oct · 15:45 JST"
+      ],
+      [
+       "Terminal",
+       "Haneda Terminal 3"
+      ]
+     ]
     },
     {
      "id": "newotani-in",
@@ -48,11 +76,21 @@
      "phone": "+81332651111",
      "phoneDisplay": "+81 3-3265-1111",
      "provider": "Booking.com",
-     "confirmation": "3004480681999961204",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a13f924eb0e72d7",
      "note": "Near Sanno Park Tower (work), ~10 min",
-     "messageId": "4j570V62XNz2wFj@mailrouter-603.fra3.prod.booking.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3A4j570V62XNz2wFj%40mailrouter-603.fra3.prod.booking.com"
+     "card": [
+      [
+       "Check-in",
+       "Sun 18 Oct · from 15:00"
+      ],
+      [
+       "Check-out",
+       "Sat 24 Oct · by 12:00"
+      ],
+      [
+       "Room",
+       "Garden Tower Standard Double, non-smoking"
+      ]
+     ]
     },
     {
      "id": "work-sanno",
@@ -73,10 +111,12 @@
      "phone": "+81332651111",
      "phoneDisplay": "+81 3-3265-1111",
      "provider": "Booking.com",
-     "confirmation": "3004480681999961204",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a13f924eb0e72d7",
-     "messageId": "4j570V62XNz2wFj@mailrouter-603.fra3.prod.booking.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3A4j570V62XNz2wFj%40mailrouter-603.fra3.prod.booking.com"
+     "card": [
+      [
+       "Check-out",
+       "Sat 24 Oct · by 12:00"
+      ]
+     ]
     },
     {
      "id": "sq5901",
@@ -87,10 +127,32 @@
      "tz": "Asia/Tokyo",
      "address": "Narita International Airport Terminal 1",
      "provider": "Singapore Airlines",
-     "confirmation": "FIDH79",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a14031104bdcc06",
-     "messageId": "SEYPR04MB9018D9969069C80397B80639A79C2@SEYPR04MB9018.apcprd04.prod.outlook.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ASEYPR04MB9018D9969069C80397B80639A79C2%40SEYPR04MB9018.apcprd04.prod.outlook.com"
+     "card": [
+      [
+       "Departs",
+       "Sat 24 Oct · 18:25 JST"
+      ],
+      [
+       "From",
+       "Tokyo Narita (NRT) · Terminal 1"
+      ],
+      [
+       "Arrives",
+       "Sun 25 Oct · 00:45 SGT"
+      ],
+      [
+       "To",
+       "Singapore Changi (SIN) · Terminal 2"
+      ],
+      [
+       "Seat",
+       "Not assigned yet"
+      ],
+      [
+       "Class",
+       "Economy · operated by ANA"
+      ]
+     ]
     },
     {
      "id": "sq5901-arr",
@@ -101,10 +163,16 @@
      "tz": "Asia/Singapore",
      "address": "Singapore Changi Airport Terminal 2",
      "provider": "Singapore Airlines",
-     "confirmation": "FIDH79",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=1a14031104bdcc06",
-     "messageId": "SEYPR04MB9018D9969069C80397B80639A79C2@SEYPR04MB9018.apcprd04.prod.outlook.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ASEYPR04MB9018D9969069C80397B80639A79C2%40SEYPR04MB9018.apcprd04.prod.outlook.com"
+     "card": [
+      [
+       "Arrives",
+       "Sun 25 Oct · 00:45 SGT"
+      ],
+      [
+       "Terminal",
+       "Changi Terminal 2"
+      ]
+     ]
     }
    ],
    "image": "img/tokyo",
@@ -133,10 +201,28 @@
      "tz": "Asia/Singapore",
      "address": "Singapore Changi Airport Terminal 2",
      "provider": "Singapore Airlines",
-     "confirmation": "FAS6GU",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19b994409c61de45",
-     "messageId": "2107224467.31175.1767802928011@csl-ecd-bookingemail-v1-73-z5qtz",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3A2107224467.31175.1767802928011%40csl-ecd-bookingemail-v1-73-z5qtz"
+     "card": [
+      [
+       "Departs",
+       "Sun 13 Dec · 23:25 SGT"
+      ],
+      [
+       "From",
+       "Singapore Changi (SIN) · Terminal 2"
+      ],
+      [
+       "Arrives",
+       "Mon 14 Dec · 06:45 KST"
+      ],
+      [
+       "To",
+       "Busan Gimhae (PUS)"
+      ],
+      [
+       "Passengers",
+       "4"
+      ]
+     ]
     },
     {
      "id": "sq616-arr",
@@ -147,10 +233,16 @@
      "tz": "Asia/Seoul",
      "address": "Gimhae International Airport, Busan",
      "provider": "Singapore Airlines",
-     "confirmation": "FAS6GU",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19ffa2fbca6787a1",
-     "messageId": "686621922.787078.1786608858509@ms-emp-emaildelivery-15-gcprn",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3A686621922.787078.1786608858509%40ms-emp-emaildelivery-15-gcprn"
+     "card": [
+      [
+       "Arrives",
+       "Mon 14 Dec · 06:45 KST"
+      ],
+      [
+       "Airport",
+       "Gimhae International, Busan"
+      ]
+     ]
     },
     {
      "id": "abnb-busan-in",
@@ -163,10 +255,16 @@
      "phone": "+821046721518",
      "phoneDisplay": "+82 10-4672-1518",
      "provider": "Airbnb",
-     "confirmation": "HMCJ2AZMFB",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19e9da909864b691",
-     "messageId": "ovhZOOYVRXKZK4zbowVTWA@geopod-ismtpd-10",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3AovhZOOYVRXKZK4zbowVTWA%40geopod-ismtpd-10"
+     "card": [
+      [
+       "Check-in",
+       "Mon 14 Dec · after 15:00 (self check-in keypad)"
+      ],
+      [
+       "Check-out",
+       "Fri 18 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "abnb-busan-out",
@@ -177,10 +275,12 @@
      "tz": "Asia/Seoul",
      "address": "Suyeong-gu, Busan, South Korea",
      "provider": "Airbnb",
-     "confirmation": "HMCJ2AZMFB",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19e9da909864b691",
-     "messageId": "ovhZOOYVRXKZK4zbowVTWA@geopod-ismtpd-10",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3AovhZOOYVRXKZK4zbowVTWA%40geopod-ismtpd-10"
+     "card": [
+      [
+       "Check-out",
+       "Fri 18 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "abnb-mangwon-in",
@@ -193,10 +293,16 @@
      "phone": "+821043229293",
      "phoneDisplay": "+82 10-4322-9293",
      "provider": "Airbnb",
-     "confirmation": "HM4JPH44PY",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19f38f1fe37789b6",
-     "messageId": "IS2loQXJSly4uy5bu542qw@geopod-ismtpd-83",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3AIS2loQXJSly4uy5bu542qw%40geopod-ismtpd-83"
+     "card": [
+      [
+       "Check-in",
+       "Fri 18 Dec · after 16:00"
+      ],
+      [
+       "Check-out",
+       "Mon 21 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "car-pickup",
@@ -209,10 +315,24 @@
      "phone": "+821082748446",
      "phoneDisplay": "+82 10 8274 8446",
      "provider": "Klook",
-     "confirmation": "RGV934769",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19ec821c379f0a80",
-     "messageId": "BJ5ViOceTFaCTO6YJ2XA6A@geopod-ismtpd-10",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ABJ5ViOceTFaCTO6YJ2XA6A%40geopod-ismtpd-10"
+     "card": [
+      [
+       "Pick-up",
+       "Sun 20 Dec · 18:00"
+      ],
+      [
+       "Drop-off",
+       "Thu 24 Dec · 18:00"
+      ],
+      [
+       "Store hours",
+       "09:00–19:00"
+      ],
+      [
+       "Car",
+       "Hyundai Santa Fe or similar (SUV)"
+      ]
+     ]
     },
     {
      "id": "abnb-mangwon-out",
@@ -223,10 +343,12 @@
      "tz": "Asia/Seoul",
      "address": "35-1 Mangwon-ro 3-gil, Mapo-gu, Seoul, South Korea",
      "provider": "Airbnb",
-     "confirmation": "HM4JPH44PY",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19f38f1fe37789b6",
-     "messageId": "IS2loQXJSly4uy5bu542qw@geopod-ismtpd-83",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3AIS2loQXJSly4uy5bu542qw%40geopod-ismtpd-83"
+     "card": [
+      [
+       "Check-out",
+       "Mon 21 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "gap-21-24",
@@ -234,10 +356,7 @@
      "title": "21–24 Dec: stay not booked yet",
      "subtitle": "High1 Mountain Condo enquiry (22–25 Dec) — bookings open from Oct 2026; no confirmation found",
      "start": "2026-12-21T12:00:00+09:00",
-     "tz": "Asia/Seoul",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19b64b85c2d5538f",
-     "messageId": "CAPwg47YFzkKNw3c3QeF4XC2pV7FKOJoWqq0QqT96hpNUsCXJ0g@mail.gmail.com",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ACAPwg47YFzkKNw3c3QeF4XC2pV7FKOJoWqq0QqT96hpNUsCXJ0g%40mail.gmail.com"
+     "tz": "Asia/Seoul"
     },
     {
      "id": "car-return",
@@ -250,10 +369,12 @@
      "phone": "+821082748446",
      "phoneDisplay": "+82 10 8274 8446",
      "provider": "Klook",
-     "confirmation": "RGV934769",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19ec821c379f0a80",
-     "messageId": "BJ5ViOceTFaCTO6YJ2XA6A@geopod-ismtpd-10",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3ABJ5ViOceTFaCTO6YJ2XA6A%40geopod-ismtpd-10"
+     "card": [
+      [
+       "Drop-off",
+       "Thu 24 Dec · 18:00"
+      ]
+     ]
     },
     {
      "id": "abnb-jongno-in",
@@ -266,10 +387,16 @@
      "phone": "+821030180041",
      "phoneDisplay": "+82 10-3018-0041",
      "provider": "Airbnb",
-     "confirmation": "HMENR4TYB9",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19f38e7ee9f74e82",
-     "messageId": "z-uNeRmPRAC5dLnIBQDLzw@geopod-ismtpd-16",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3Az-uNeRmPRAC5dLnIBQDLzw%40geopod-ismtpd-16"
+     "card": [
+      [
+       "Check-in",
+       "Thu 24 Dec · after 16:00"
+      ],
+      [
+       "Check-out",
+       "Sun 27 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "abnb-jongno-out",
@@ -280,10 +407,12 @@
      "tz": "Asia/Seoul",
      "address": "33-14 Gyeonghuigung 1-gil, Jongno-gu, Seoul, South Korea",
      "provider": "Airbnb",
-     "confirmation": "HMENR4TYB9",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19f38e7ee9f74e82",
-     "messageId": "z-uNeRmPRAC5dLnIBQDLzw@geopod-ismtpd-16",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3Az-uNeRmPRAC5dLnIBQDLzw%40geopod-ismtpd-16"
+     "card": [
+      [
+       "Check-out",
+       "Sun 27 Dec · by 11:00"
+      ]
+     ]
     },
     {
      "id": "sq601",
@@ -294,10 +423,28 @@
      "tz": "Asia/Seoul",
      "address": "Incheon International Airport Terminal 1",
      "provider": "Singapore Airlines",
-     "confirmation": "FAS6GU",
-     "emailUrl": "https://mail.google.com/mail/u/0/?th=19b994409c61de45",
-     "messageId": "2107224467.31175.1767802928011@csl-ecd-bookingemail-v1-73-z5qtz",
-     "findUrl": "https://mail.google.com/mail/u/0/#search/rfc822msgid%3A2107224467.31175.1767802928011%40csl-ecd-bookingemail-v1-73-z5qtz"
+     "card": [
+      [
+       "Departs",
+       "Sun 27 Dec · 16:55 KST"
+      ],
+      [
+       "From",
+       "Seoul Incheon (ICN) · Terminal 1"
+      ],
+      [
+       "Arrives",
+       "Sun 27 Dec · 22:30 SGT"
+      ],
+      [
+       "To",
+       "Singapore Changi (SIN)"
+      ],
+      [
+       "Passengers",
+       "4"
+      ]
+     ]
     }
    ],
    "image": "img/korea",

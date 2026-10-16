@@ -11,6 +11,7 @@ const imgOf=(t,s)=>`${t.image||'img/travel'}-${s}.webp`;
 const bgOf=(t,s)=>{const th=themeOf(t);return `linear-gradient(180deg,rgba(0,0,0,.05) 0%,color-mix(in srgb,${th.tint} 55%,transparent) 55%,color-mix(in srgb,${th.tint} 92%,black) 100%),linear-gradient(135deg,color-mix(in srgb,${th.accent} 35%,transparent),transparent 60%),url('${imgOf(t,s)}') center/cover`};
 function applyTheme(t){const r=document.documentElement.style;if(!t){['--acc','--acc2','--chip','--tint'].forEach(k=>r.removeProperty(k));return}const th=themeOf(t);r.setProperty('--acc',th.accent);r.setProperty('--acc2',th.accent2);r.setProperty('--chip',th.chip);r.setProperty('--tint',th.tint)}
 const local=()=>JSON.parse(localStorage.getItem(LS)||'{}');const saveLocal=o=>localStorage.setItem(LS,JSON.stringify(o));
+const PRIV='trips.private.v1';const priv=()=>{if(SHARE)return{};try{return(JSON.parse(localStorage.getItem(PRIV)||'{}').items)||{}}catch(e){return{}}};
 const owner=()=>JSON.parse(localStorage.getItem(OWN)||'{}');
 function merged(){const l=local();return DATA.trips.map(t=>({...t,items:[...t.items,...(l[t.id]||[])]}))}
 const dayKey=(iso,tz)=>new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
@@ -22,22 +23,22 @@ const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)
 function home(){applyTheme(null);const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
  const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${bgOf(t,'card')};--acc:${themeOf(t).accent}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><div class="row">${SHARE?'':'<button class="btn pri" id="scan">📥 Check inbox</button>'}<button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button><button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
+ app.innerHTML=`<header><h1>Trips</h1><div class="row">${SHARE?'':'<button class="btn pri" id="scan">📥 Check inbox</button>'}<button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button>${SHARE?'':'<button class="btn" id="pm" aria-label="Private details">🔑</button>'}<button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
- $('#th').onclick=toggleTheme;$('#scan')&&($('#scan').onclick=scan);$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
+ $('#th').onclick=toggleTheme;$('#pm')&&($('#pm').onclick=privMenu);$('#scan')&&($('#scan').onclick=scan);$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
-function itemHTML(it,t){const tz=it.tz||t.timezone,o=owner()[it.id]||{};
- const m=[];if(it.start&&!it.allTrip)m.push();
- if(it.confirmation&&!SHARE)m.push(`<button data-copy="${esc(it.confirmation)}"><span class="k">#</span><span class="mono">${esc(it.confirmation)}</span><span class="k">📋</span></button>`);
- if(it.address)m.push(`<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.address)}"><span class="k">📍</span>${esc(it.address)}</a>`);
- if(it.phone)m.push(`<a href="tel:${esc(it.phone)}"><span class="k">📞</span>${esc(it.phoneDisplay||it.phone)}</a>`);
- if(it.note)m.push(`<div class="su">${esc(it.note)}</div>`);
- if(!SHARE&&o.notes)m.push(`<div class="su">🔒 ${esc(o.notes)}</div>`);
+function itemHTML(it,t){const tz=it.tz||t.timezone,o=SHARE?{}:(owner()[it.id]||{});
+ const rows=[];const pv=priv()[it.id]||{};
+ if(!SHARE){Object.entries(pv).forEach(([k,v])=>rows.push([k,v,1]));if(it.confirmation)rows.unshift(['Confirmation',it.confirmation,1])}
+ (it.card||[]).forEach(([k,v])=>rows.push([k,v]));
+ if(it.address)rows.push(['Address',it.address,0,'map']);
+ if(it.phone&&!SHARE)rows.push(['Phone',it.phoneDisplay||it.phone,0,'tel',it.phone]);
+ const row=([k,v,p,kind,raw])=>`<div class="cr${p?' pv':''}"><span class="ck">${p?'🔒 ':''}${esc(k)}</span><span class="cv">${kind==='map'?`<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}">${esc(v)}</a>`:kind==='tel'?`<a href="tel:${esc(raw)}">${esc(v)}</a>`:esc(v)}</span><button class="cp" type="button" data-copy="${esc(v)}" aria-label="Copy ${esc(k)}">Copy</button></div>`;
  return `<div class="item ${it.allTrip?'all':''}"><span class="dot">${ICON[it.type]||'•'}</span>
  <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
- ${m.length?`<div class="meta">${m.join('')}</div>`:''}
- ${!SHARE&&it.emailUrl?`<a class="btn pri email" href="${esc(it.emailUrl)}">✉︎ Open booking email</a>${it.findUrl?`<a class="weblink" href="${esc(it.findUrl)}">Find email</a>`:''}${IS_ANDROID?`<a class="weblink" href="#" data-gm="${esc(gmTerm(it))}" data-conf="${it.confirmation?1:''}">Open Gmail app</a>`:''}`:''}
+ ${rows.length?`<div class="ccard">${rows.map(row).join('')}</div>`:''}
+ ${it.note?`<div class="su" style="margin-top:8px">${esc(it.note)}</div>`:''}${o.notes?`<div class="su">🔒 ${esc(o.notes)}</div>`:''}
  ${!SHARE&&it._local?`<button class="btn" data-del="${it.id}" style="margin-top:8px">Remove</button>`:''}</div>`}
 function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>Trip not found. <a href="./">Home</a></p>';return}
  applyTheme(t);const groups={},all=[];t.items.forEach(i=>{if(i.allTrip||!i.start)return all.push(i);const k=dayKey(i.start,i.tz||t.timezone);(groups[k]=groups[k]||[]).push(i)});
@@ -51,7 +52,6 @@ function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>T
  ${days.map(k=>{const f=fmtDay(k),its=(groups[k]||[]).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day ${k===today?'today':''}" ${k===today?'id="now"':''}><div class="dh"><b>${f.w}</b><span>${f.d}</span></div>${its.length?its.map(i=>itemHTML(i,t)).join(''):'<div class="item" style="opacity:.55"><span class="dot">·</span><div class="su">Free day</div></div>'}</div>`}).join('')}
  ${SHARE?'':`<div class="row" style="margin-top:24px"><button class="btn" id="add">＋ Add item</button><button class="btn" id="exp">⇩ Export JSON</button></div><div id="form"></div>`}`;
  $('#now')?.scrollIntoView({behavior:'smooth',block:'start'});
- app.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>navigator.clipboard.writeText(b.dataset.copy).then(()=>toast('Copied')));
  app.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const l=local();l[t.id]=(l[t.id]||[]).filter(i=>i.id!==b.dataset.del);saveLocal(l);trip(id)});
  $('#sh').onclick=async()=>{const url=location.origin+location.pathname+`?trip=${t.id}&view=share`;if(navigator.share){try{await navigator.share({title:t.title,text:`My itinerary: ${t.title}`,url})}catch(e){}}else{await navigator.clipboard.writeText(url);toast('Share link copied')}};
  $('#ics').onclick=()=>ics(t);
@@ -59,10 +59,10 @@ function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>T
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));a.download='trips.json';a.click()}}}
 function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="type"><option value="event">Event</option><option value="flight">Flight</option><option value="hotel-checkin">Hotel check-in</option><option value="hotel-checkout">Hotel check-out</option><option value="train">Train</option><option value="food">Food</option><option value="place">Place</option></select></label>
  <label>Title<input name="title" required></label><label>Details<input name="subtitle"></label><label>Date & time (${t.timezone})<input type="datetime-local" name="dt" required></label>
- <label>Address<input name="address"></label><label>Phone<input name="phone"></label><label>Confirmation #<input name="confirmation"></label><label>Booking email link<input name="emailUrl" placeholder="https://mail.google.com/..."></label>
+ <label>Address<input name="address"></label><label>Phone<input name="phone"></label><label>Confirmation #<input name="confirmation"></label>
  <label>🔒 Private notes (this device only — PINs etc.)<textarea name="notes"></textarea></label><button class="btn pri">Save</button></form>`;
  $('#f').onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));const off=t.timezone==='Asia/Singapore'?'+08:00':'+09:00';
-  const it={id:'l'+Date.now(),_local:true,type:f.type,title:f.title,subtitle:f.subtitle,start:f.dt+':00'+off,tz:t.timezone,address:f.address,phone:f.phone,confirmation:f.confirmation,emailUrl:f.emailUrl};
+  const it={id:'l'+Date.now(),_local:true,type:f.type,title:f.title,subtitle:f.subtitle,start:f.dt+':00'+off,tz:t.timezone,address:f.address,phone:f.phone,confirmation:f.confirmation};
   Object.keys(it).forEach(k=>it[k]===''&&delete it[k]);const l=local();(l[t.id]=l[t.id]||[]).push(it);saveLocal(l);
   if(f.notes){const o=owner();o[it.id]={notes:f.notes};localStorage.setItem(OWN,JSON.stringify(o))}toast('Saved');trip(t.id)}}
 function ics(t){const s=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');const e=x=>String(x||'').replace(/[,;\\]/g,m=>'\\'+m).replace(/\n/g,'\\n');
@@ -82,12 +82,20 @@ async function poll(){const base=JSON.stringify(DATA);let n=0;const t=setInterva
  try{const nd=await (await fetch('data/trips.json?t='+Date.now(),{cache:'no-store'})).json();if(JSON.stringify(nd)!==base){DATA=nd;clearInterval(t);setSt('New bookings added ✓');const id=P.get('trip');id?trip(id):home();return}}catch(e){}
  if(n>=15){clearInterval(t);setSt('No new bookings yet — check back later')}},20000)}
 
-const IS_ANDROID=/Android/i.test(navigator.userAgent);
-function gmTerm(it){if(it.confirmation)return String(it.confirmation);return String(it.title||'').replace(/^(Check in|Check out|Arrive[^·]*)\s*·\s*/i,'').replace(/\s*·.*$/,'').trim()||String(it.title||'')}
-const GM_INTENT='intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.gm;end';
-document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-gm]');if(!b)return;e.preventDefault();const term=b.dataset.gm;
- try{await navigator.clipboard.writeText(term)}catch(_){}
- toast(b.dataset.conf?'Confirmation # copied, paste it in Gmail search':'"'+term+'" copied, paste it in Gmail search');setTimeout(()=>{location.href=GM_INTENT},600)});
+function copyNow(v,b){let ok=true;try{const p=navigator.clipboard&&navigator.clipboard.writeText(v);if(!p)throw 0;p.catch(()=>fallbackCopy(v))}catch(e){ok=fallbackCopy(v)}
+ if(b){b.classList.add('done');b.textContent='Copied ✓';clearTimeout(b._t);b._t=setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1500)}toast('Copied')}
+function fallbackCopy(v){const ta=document.createElement('textarea');ta.value=v;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();let r=false;try{r=document.execCommand('copy')}catch(e){}ta.remove();return r}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;e.preventDefault();copyNow(b.dataset.copy,b)});
+function privMenu(){const el=document.createElement('div');el.className='sheet';const n=Object.keys(priv()).length;
+ el.innerHTML=`<form id="pf"><b>Private details</b><div class="su">Stored on this device only (never uploaded). ${n?n+' bookings loaded.':'Nothing imported yet.'}</div>
+ <label>Paste JSON<textarea name="j" rows="6" placeholder='{"version":1,"items":{...}}'></textarea></label>
+ <label>…or open a file<input type="file" name="f" accept="application/json,.json"></label>
+ <div class="row"><button class="btn pri">Import</button>${n?'<button class="btn" type="button" id="pc">Clear</button>':''}<button class="btn" type="button" id="px">Close</button></div></form>`;
+ document.body.appendChild(el);const close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};el.querySelector('#px').onclick=close;
+ el.querySelector('#pc')&&(el.querySelector('#pc').onclick=()=>{localStorage.removeItem(PRIV);close();toast('Private details cleared');rerender()});
+ el.querySelector('#pf').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);let txt=fd.get('j');const f=fd.get('f');if(f&&f.size)txt=await f.text();
+  try{const j=JSON.parse(txt);if(!j||typeof j.items!=='object')throw 0;localStorage.setItem(PRIV,JSON.stringify(j));close();toast('Imported '+Object.keys(j.items).length+' bookings');rerender()}catch(_){toast('Not valid private-details JSON')}}}
+function rerender(){const id=P.get('trip');id?trip(id):home()}
 let deferredInstall=null,appInstalled=false;
 const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 function syncInstall(){const b=document.getElementById('installApp'),h=document.getElementById('inst');const sa=isStandalone()||appInstalled;if(b)b.hidden=!deferredInstall||sa;if(h)h.hidden=sa}
