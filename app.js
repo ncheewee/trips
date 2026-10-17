@@ -23,7 +23,7 @@ const range=t=>{const a=fmtDay(t.start),b=fmtDay(t.end);return `${a.w.slice(0,3)
 function home(){applyTheme(null);const ts=merged(),today=new Date().toISOString().slice(0,10);
  const up=ts.filter(t=>t.end>=today).sort((a,b)=>a.start.localeCompare(b.start)),past=ts.filter(t=>t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
  const card=(t,p)=>`<a class="trip ${p?'past':''}" href="?trip=${t.id}" style="background:${bgOf(t,'card')};--acc:${themeOf(t).accent}"><span class="em">${t.emoji||'✈️'}</span><div class="t">${esc(t.title)}</div><div class="d">${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></a>`;
- app.innerHTML=`<header><h1>Trips</h1><div class="row">${SHARE?'':'<button class="btn pri" id="scan">📥 Check inbox</button>'}<button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button>${SHARE?'':'<button class="btn" id="pm" aria-label="Private details">🔑</button>'}<button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
+ app.innerHTML=`<header><h1 class="logo">Tripie<span class="plane" aria-hidden="true">✈️</span></h1><div class="row">${SHARE?'':'<button class="btn pri" id="scan">📥 Check inbox</button>'}<button class="btn pri" id="installApp" hidden>⤓ Install app</button><button class="btn" id="inst" aria-label="Install help">?</button>${SHARE?'':'<button class="btn" id="pm" aria-label="Private details">🔑</button>'}<button class="btn" id="th">◐</button></div></header><div id="scanst" class="sharebar"></div>
  ${up.length?'<h2>Upcoming</h2>'+up.map(t=>card(t)).join(''):'<p class="sharebar">No upcoming trips.</p>'}${past.length?'<h2>Past</h2>'+past.map(t=>card(t,1)).join(''):''}`;
  $('#th').onclick=toggleTheme;$('#pm')&&($('#pm').onclick=privMenu);$('#scan')&&($('#scan').onclick=scan);$('#inst').onclick=installHelp;syncInstall();$('#installApp').onclick=doInstall;if(SCAN.msg)$('#scanst').textContent=SCAN.msg}
 function toggleTheme(){const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.setItem('theme',n)}
@@ -45,9 +45,9 @@ function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>T
  const days=[];for(let d=new Date(t.start+'T00:00:00Z');d<=new Date(t.end+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+1))days.push(d.toISOString().slice(0,10));
  Object.keys(groups).forEach(k=>{if(!days.includes(k))days.push(k)});days.sort();
  const today=dayKey(new Date().toISOString(),t.timezone);
- app.innerHTML=`<header>${SHARE?'<span></span>':'<a class="btn" href="./">‹ Trips</a>'}<div class="row"><button class="btn" id="ics">📅 Calendar</button><button class="btn" id="sh">↗ Share</button></div></header>
+ app.innerHTML=`<header>${SHARE?'<span></span>':'<a class="btn" href="./">‹ Tripie</a>'}<div class="row"><button class="btn" id="ics">📅 Calendar</button><button class="btn" id="sh">↗ Share</button></div></header>
  <div class="hero" style="background:${bgOf(t,'hero')}"><div style="font-size:40px">${t.emoji||''}</div><div class="t">${esc(t.title)}</div><div>${esc(t.destination)} · ${range(t)}</div><span class="pill">${rel(t)}</span></div>
- ${SHARE?'<div class="sharebar">Shared itinerary · read-only</div>':''}
+ ${SHARE?'<div class="sharebar">Shared via Tripie · read-only</div>':''}
  ${all.length?`<div class="day"><div class="dh"><b>Key places</b></div>${all.map(i=>itemHTML(i,t)).join('')}</div>`:''}
  ${days.map(k=>{const f=fmtDay(k),its=(groups[k]||[]).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day ${k===today?'today':''}" ${k===today?'id="now"':''}><div class="dh"><b>${f.w}</b><span>${f.d}</span></div>${its.length?its.map(i=>itemHTML(i,t)).join(''):'<div class="item" style="opacity:.55"><span class="dot">·</span><div class="su">Free day</div></div>'}</div>`}).join('')}
  ${SHARE?'':packHTML(t)}${SHARE?'':`<div class="row" style="margin-top:24px"><button class="btn" id="add">＋ Add item</button><button class="btn" id="exp">⇩ Export JSON</button></div><div id="form"></div>`}`;
@@ -68,7 +68,7 @@ function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="typ
 function ics(t){const s=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');const e=x=>String(x||'').replace(/[,;\\]/g,m=>'\\'+m).replace(/\n/g,'\\n');
  const ev=t.items.filter(i=>i.start&&!i.allTrip).map(i=>['BEGIN:VEVENT',`UID:${i.id}@trips`,`DTSTAMP:${s(Date.now())}`,`DTSTART:${s(i.start)}`,`DTEND:${s(i.end||new Date(i.start).getTime()+36e5)}`,`SUMMARY:${e(i.title)}`,i.address?`LOCATION:${e(i.address)}`:'',`DESCRIPTION:${e([i.subtitle,SHARE?'':i.confirmation&&'Conf '+i.confirmation].filter(Boolean).join('\n'))}`,'END:VEVENT'].filter(Boolean).join('\r\n'));
  const all=['BEGIN:VEVENT',`UID:${t.id}@trips`,`DTSTAMP:${s(Date.now())}`,`DTSTART;VALUE=DATE:${t.start.replace(/-/g,'')}`,`DTEND;VALUE=DATE:${(()=>{const d=new Date(t.end+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+1);return d.toISOString().slice(0,10).replace(/-/g,'')})()}`,`SUMMARY:${e(t.title)}`,'END:VEVENT'].join('\r\n');
- const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trips//EN',all,...ev,'END:VCALENDAR'].join('\r\n');
+ const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Tripie//EN',all,...ev,'END:VCALENDAR'].join('\r\n');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download=t.id+'.ics';a.click()}
 async function boot(){try{DATA=await (await fetch('data/trips.json',{cache:'no-cache'})).json()}catch(e){}
  const id=P.get('trip');id?trip(id):home();refreshPriv();if('serviceWorker'in navigator)navigator.serviceWorker.register('/trips/sw.js',{scope:'/trips/'}).catch(()=>navigator.serviceWorker.register('sw.js'))}
@@ -129,11 +129,11 @@ addEventListener('appinstalled',()=>{appInstalled=true;deferredInstall=null;sync
 matchMedia('(display-mode: standalone)').addEventListener?.('change',syncInstall);
 function installHelp(){const el=document.createElement('div');el.className='sheet';
  const ua=navigator.userAgent,android=/Android/i.test(ua),ios=/iPhone|iPad/i.test(ua),mac=/Macintosh/.test(ua)&&!/Chrome/.test(ua);
- const steps=[['Android · Chrome (Pixel)',`<ol><li>Tap <b>⋮</b> (top right) → <b>Install app</b> (or <b>Add to home screen</b> → <b>Install</b>).</li><li>If Chrome says it's already installed or shows <b>Open in app</b>, an old copy is on your phone: long-press the old <b>Trips</b> (or <b>2048</b>) icon → <b>App info</b> → <b>Uninstall</b>.</li><li>Then Chrome → <b>Settings</b> → <b>Site settings</b> → <b>All sites</b> → <b>ncheewee.github.io</b> → <b>Clear &amp; reset</b>, reopen this page and install again.</li></ol>`,android],
+ const steps=[['Android · Chrome (Pixel)',`<ol><li>Tap <b>⋮</b> (top right) → <b>Install app</b> (or <b>Add to home screen</b> → <b>Install</b>).</li><li>If Chrome says it's already installed or shows <b>Open in app</b>, an old copy is on your phone: long-press the old <b>Trips</b>, <b>Tripie</b> (or <b>2048</b>) icon → <b>App info</b> → <b>Uninstall</b>.</li><li>Then Chrome → <b>Settings</b> → <b>Site settings</b> → <b>All sites</b> → <b>ncheewee.github.io</b> → <b>Clear &amp; reset</b>, reopen this page and install again.</li></ol>`,android],
  ['iPhone · Safari','<ol><li>Tap <b>Share</b> → <b>Add to Home Screen</b> → <b>Add</b>.</li></ol>',ios],
  ['Mac · Safari','<ol><li><b>File</b> → <b>Add to Dock…</b></li></ol>',mac],
  ['Chrome · desktop','<ol><li>Click the install icon in the address bar, or <b>⋮</b> → <b>Cast, save and share</b> → <b>Install page as app…</b></li></ol>',false]];
  steps.sort((a,b)=>(b[2]?1:0)-(a[2]?1:0));
- el.innerHTML=`<form><b>Install Trips</b>${deferredInstall?'<button class="btn pri" type="button" id="ip">Install now</button>':''}${steps.map(([h,b])=>`<div><div class="ti">${h}</div><div class="su">${b}</div></div>`).join('')}<button class="btn" type="button" id="ix">Close</button></form>`;
+ el.innerHTML=`<form><b>Install Tripie</b>${deferredInstall?'<button class="btn pri" type="button" id="ip">Install now</button>':''}${steps.map(([h,b])=>`<div><div class="ti">${h}</div><div class="su">${b}</div></div>`).join('')}<button class="btn" type="button" id="ix">Close</button></form>`;
  document.body.appendChild(el);el.onclick=e=>{if(e.target===el)el.remove()};el.querySelector('#ix').onclick=()=>el.remove();
  el.querySelector('#ip')&&(el.querySelector('#ip').onclick=async()=>{deferredInstall.prompt();await deferredInstall.userChoice.catch(()=>{});deferredInstall=null;el.remove()})}

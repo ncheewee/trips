@@ -1,7 +1,7 @@
 {
- "name": "Trips · Chee Wee",
- "short_name": "Trips",
- "description": "Your trips, beautifully on a timeline.",
+ "name": "Tripie · Chee Wee",
+ "short_name": "Tripie",
+ "description": "Your trips, playfully on a timeline.",
  "start_url": "/trips/",
  "scope": "/trips/",
  "display": "standalone",

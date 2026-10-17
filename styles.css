@@ -3,12 +3,17 @@
 :root[data-theme=dark]{--bg:#0b0b14;--fg:#f4f3fa;--mut:#9a98b3;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.1)}
 :root[data-theme=light]{--bg:#f6f5fb;--fg:#15142b;--mut:#6d6b86;--card:rgba(255,255,255,.85);--line:rgba(20,20,60,.08)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;min-height:100vh;
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 "Nunito",-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;font-variant-numeric:tabular-nums;min-height:100vh;
 background-image:radial-gradient(60vw 40vh at 100% -10%,rgba(123,92,255,.22),transparent),radial-gradient(60vw 40vh at -10% 10%,rgba(255,107,139,.16),transparent);background-attachment:fixed}
 #app{max-width:680px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 18px) 18px 90px;animation:in .35s ease}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-h1{font-size:34px;letter-spacing:-.03em;margin:0;font-weight:800}
+h1{font-size:34px;letter-spacing:-.01em;margin:0;font-weight:700}
+h1,.trip .t,.hero .t,.dh b,.item .ti,.pkh,.sheet b{font-family:"Fredoka","Nunito",ui-rounded,system-ui,sans-serif}
+.logo{font-size:38px;font-weight:700;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo .plane{font-size:26px;display:inline-block;color:initial;-webkit-text-fill-color:initial;animation:wig 3.2s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes wig{0%,70%,100%{transform:rotate(0) translateY(0)}78%{transform:rotate(-12deg) translateY(-3px)}86%{transform:rotate(10deg) translateY(-1px)}94%{transform:rotate(-4deg)}}
+@media(prefers-reduced-motion:reduce){.logo .plane{animation:none}}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin:26px 4px 10px}
 .btn{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:9px 14px;font:600 14px inherit;font-family:inherit;cursor:pointer;backdrop-filter:blur(12px);text-decoration:none;display:inline-flex;gap:6px;align-items:center}
 .btn.pri{background:linear-gradient(135deg,var(--acc),var(--acc2));border:0;color:#fff}
@@ -33,6 +38,7 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)
 .meta a,.meta button{all:unset;cursor:pointer;font-size:14px;display:flex;gap:8px;align-items:center;color:var(--fg)}
 .meta .k{color:var(--mut);min-width:20px}
 .mono{font-family:ui-monospace,Menlo,monospace;letter-spacing:.02em}
+.cr.pv .cv{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;letter-spacing:.02em}
 .email{margin-top:12px;width:100%;justify-content:center}
 .all{border-style:dashed}
 form{display:grid;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:14px}

@@ -1,4 +1,6 @@
-# Trips
+# Tripie ✈️
+
+_(repo and URL stay `trips`)_
 
 A fast, offline-capable PWA showing trips on a beautiful day-by-day timeline. Live: https://ncheewee.github.io/trips/
 
