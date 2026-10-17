@@ -73,3 +73,6 @@ header{flex-wrap:wrap;gap:10px}header .row{flex-wrap:nowrap}header .btn{padding:
 .pki input{width:20px;height:20px;accent-color:var(--acc);flex:none}.pki span{flex:1}.pki.on span{text-decoration:line-through;color:var(--mut)}
 .pkx{border:0;background:none;color:var(--mut);font-size:20px;cursor:pointer;padding:0 4px}
 .pkadd{display:flex;gap:8px;margin-top:4px}.pkadd input,.pkadd select{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:9px;font:inherit}.pkadd select{flex:0 1 38%}
+
+.item.plan{border-style:dashed}
+.ptag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);border:1px dashed var(--acc);border-radius:6px;padding:1px 6px;margin-right:6px;vertical-align:1px}

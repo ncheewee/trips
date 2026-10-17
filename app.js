@@ -2,7 +2,7 @@ const $=s=>document.querySelector(s),app=$('#app'),P=new URLSearchParams(locatio
 const SHARE=P.get('view')==='share',LS='trips.local.v1',OWN='trips.owner.v1';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._);t._=setTimeout(()=>t.classList.remove('on'),1600)};
-const ICON={'hotel-checkin':'🛎','hotel-checkout':'🧳',flight:'✈️',event:'🎟',place:'📍',train:'🚄',food:'🍜'};
+const ICON={plan:'🗺️','hotel-checkin':'🛎','hotel-checkout':'🧳',flight:'✈️',event:'🎟',place:'📍',train:'🚄',food:'🍜'};
 const theme=localStorage.getItem('theme');if(theme)document.documentElement.dataset.theme=theme;
 let DATA={trips:[]};
 function hue(str){let h=0;for(const c of str)h=(h*31+c.charCodeAt(0))>>>0;return h%360}
@@ -34,8 +34,8 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=SHARE?{}:(owner()[it.id]||{
  if(it.address)rows.push(['Address',it.address,0,'map']);
  if(it.phone&&!SHARE)rows.push(['Phone',it.phoneDisplay||it.phone,0,'tel',it.phone]);
  const row=([k,v,p,kind,raw])=>`<div class="cr${p?' pv':''}"><span class="ck">${p?'🔒 ':''}${esc(k)}</span><span class="cv">${kind==='map'?`<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}">${esc(v)}</a>`:kind==='tel'?`<a href="tel:${esc(raw)}">${esc(v)}</a>`:esc(v)}</span><button class="cp" type="button" data-copy="${esc(v)}" aria-label="Copy ${esc(k)}">Copy</button></div>`;
- return `<div class="item ${it.allTrip?'all':''}"><span class="dot">${it.icon||ICON[it.type]||'•'}</span>
- <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
+ return `<div class="item ${it.allTrip?'all':''}${it.plan?' plan':''}"><span class="dot">${it.icon||ICON[it.type]||'•'}</span>
+ <div class="tm">${it.plan?'<span class="ptag">Plan</span>':''}${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
  ${rows.length?`<div class="ccard">${rows.map(row).join('')}</div>`:''}
  ${it.note?`<div class="su" style="margin-top:8px">${esc(it.note)}</div>`:''}${o.notes?`<div class="su">🔒 ${esc(o.notes)}</div>`:''}
@@ -57,7 +57,7 @@ function trip(id){const t=merged().find(x=>x.id===id);if(!t){app.innerHTML='<p>T
  $('#ics').onclick=()=>ics(t);if(!SHARE)bindPack(t);
  if(!SHARE){$('#add').onclick=()=>form(t);$('#exp').onclick=()=>{const l=local();const out={trips:DATA.trips.map(x=>({...x,items:[...x.items,...(l[x.id]||[]).map(({_local,...r})=>r)]}))};
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));a.download='trips.json';a.click()}}}
-function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="type"><option value="event">Event</option><option value="flight">Flight</option><option value="hotel-checkin">Hotel check-in</option><option value="hotel-checkout">Hotel check-out</option><option value="train">Train</option><option value="food">Food</option><option value="place">Place</option></select></label>
+function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="type"><option value="event">Event</option><option value="flight">Flight</option><option value="hotel-checkin">Hotel check-in</option><option value="hotel-checkout">Hotel check-out</option><option value="train">Train</option><option value="food">Food</option><option value="place">Place</option><option value="plan">Plan</option></select></label>
  <label>Title<input name="title" required></label><label>Details<input name="subtitle"></label><label>Date & time (${t.timezone})<input type="datetime-local" name="dt" required></label>
  <label>Address<input name="address"></label><label>Phone<input name="phone"></label><label>Confirmation #<input name="confirmation"></label>
  <label>🔒 Private notes (this device only — PINs etc.)<textarea name="notes"></textarea></label><button class="btn pri">Save</button></form>`;

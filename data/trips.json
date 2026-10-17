@@ -142,6 +142,275 @@
      ]
     },
     {
+     "id": "sat-plan-day",
+     "type": "plan",
+     "plan": true,
+     "title": "Saturday half-day plan · Narita, Sawara & Narita-san",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T06:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "card": [
+      [
+       "Cash",
+       "Carry about ¥15–20k · boat is cash only, Kawatoyo cash or PayPay"
+      ],
+      [
+       "Weather",
+       "Check the forecast. Typhoon season can stop the Sawara boat"
+      ],
+      [
+       "Flight",
+       "SQ 5901 · NRT T1 18:25 → SIN T2 00:45 (+1)"
+      ]
+     ],
+     "note": "Order: check out → Skyliner to Narita → early bag drop → JR to Sawara → lunch → back to Narita → Kawatoyo + Naritasan → airport."
+    },
+    {
+     "id": "sat-checkout",
+     "type": "plan",
+     "plan": true,
+     "title": "Check out · Hotel New Otani (early)",
+     "subtitle": "Main Building front desk (24h)",
+     "start": "2026-10-24T06:30:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "4-1 Kioicho, Chiyoda-ku, Tokyo 102-8578",
+     "card": [
+      [
+       "Before 08:00",
+       "Main Building front desk · open 24h"
+      ],
+      [
+       "Garden Tower desk",
+       "Opens 08:00"
+      ]
+     ]
+    },
+    {
+     "id": "sat-skyliner",
+     "type": "plan",
+     "plan": true,
+     "title": "Ginza line → Ueno, then Keisei Skyliner → Narita T1",
+     "subtitle": "Akasaka-mitsuke 06:45 → Ueno (~17 min) · Skyliner ~07:20 → Narita T1 ~08:05",
+     "start": "2026-10-24T06:45:00+09:00",
+     "tz": "Asia/Tokyo",
+     "card": [
+      [
+       "Leg 1",
+       "Ginza line Akasaka-mitsuke → Ueno (~17 min)"
+      ],
+      [
+       "Leg 2",
+       "Keisei Skyliner Ueno ~07:20 → Narita Airport T1 (~41 min)"
+      ],
+      [
+       "Skyliner fare",
+       "¥2,470"
+      ],
+      [
+       "Arrive",
+       "~08:05 · Narita Terminal 1"
+      ]
+     ],
+     "note": "Skyliner departs Keisei Ueno station (short walk from Ginza line Ueno)."
+    },
+    {
+     "id": "sat-bagdrop",
+     "type": "plan",
+     "plan": true,
+     "title": "Early bag drop · ANA counter, Narita T1 South Wing",
+     "subtitle": "SQ 5901 operated by Air Japan (NQ/NH 801) · counters open 07:00",
+     "start": "2026-10-24T08:10:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Narita International Airport Terminal 1, South Wing",
+     "card": [
+      [
+       "Counter",
+       "ANA · Terminal 1 South Wing"
+      ],
+      [
+       "Opens",
+       "07:00 (all flights)"
+      ],
+      [
+       "Bag drop closes",
+       "17:25 (60 min before 18:25)"
+      ],
+      [
+       "Flight",
+       "SQ 5901 = Air Japan NQ/NH 801 · B787-9 · NRT 18:25 → SIN T2 00:45 (+1)"
+      ],
+      [
+       "Backup",
+       "Coin lockers (large ¥800/day) or JAL ABC storage (¥1,000/day)"
+      ]
+     ],
+     "note": "To confirm: early check-in works on the CWT ticket."
+    },
+    {
+     "id": "sat-jr-sawara",
+     "type": "plan",
+     "plan": true,
+     "title": "JR Narita → Sawara",
+     "subtitle": "Narita Airport → JR Narita ~09:00 · 09:40 → Sawara ~10:10",
+     "start": "2026-10-24T09:40:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "JR Narita Station",
+     "card": [
+      [
+       "Train",
+       "JR Narita 09:40 → Sawara ~10:10 (~31 min)"
+      ],
+      [
+       "Fare",
+       "¥510"
+      ],
+      [
+       "Before",
+       "~09:00 from airport to JR Narita station"
+      ]
+     ]
+    },
+    {
+     "id": "sat-sawara",
+     "type": "plan",
+     "plan": true,
+     "title": "Explore Sawara · canal boat, Ino Tadataka, Baba Honten",
+     "subtitle": "Edo-era canal town",
+     "start": "2026-10-24T10:15:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Sawara, Katori, Chiba",
+     "card": [
+      [
+       "Canal boat",
+       "30 min · ¥1,300 cash · 10:00–15:30 (Oct) · weather-dependent"
+      ],
+      [
+       "Ino Tadataka house & museum",
+       "09:00–16:30"
+      ],
+      [
+       "Baba Honten",
+       "Sake brewery"
+      ]
+     ],
+     "note": "Boat may not run in bad weather; museum and brewery are the fallback."
+    },
+    {
+     "id": "sat-lunch",
+     "type": "plan",
+     "plan": true,
+     "title": "Lunch · Koboriya soba, Sawara",
+     "subtitle": "Classic soba in Sawara",
+     "start": "2026-10-24T11:45:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Koboriya, Sawara, Katori, Chiba",
+     "icon": "🍜",
+     "card": [
+      [
+       "Hours",
+       "11:00–16:30 · closed Wed"
+      ]
+     ]
+    },
+    {
+     "id": "sat-jr-back",
+     "type": "plan",
+     "plan": true,
+     "title": "JR Sawara → Narita",
+     "subtitle": "Sawara 12:53 → Narita 13:24",
+     "start": "2026-10-24T12:53:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "JR Sawara Station",
+     "card": [
+      [
+       "Train",
+       "Sawara 12:53 → Narita 13:24"
+      ],
+      [
+       "Later trains",
+       "13:51 · 14:52"
+      ]
+     ]
+    },
+    {
+     "id": "sat-naritasan",
+     "type": "plan",
+     "plan": true,
+     "title": "Narita-san · put name down at Kawatoyo, walk Omotesando to Shinshoji",
+     "subtitle": "Kawatoyo first, then temple",
+     "start": "2026-10-24T13:30:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Kawatoyo Honten, Narita, Chiba",
+     "card": [
+      [
+       "Kawatoyo",
+       "Unagi · 10:00–17:00 (last order) · cash or PayPay only"
+      ],
+      [
+       "Saturday queue",
+       "60–90 min · give your name first"
+      ],
+      [
+       "Omotesando",
+       "Old shopping street down to the temple"
+      ],
+      [
+       "Naritasan Shinshoji",
+       "Grounds 06:00–16:00"
+      ]
+     ]
+    },
+    {
+     "id": "sat-unagi",
+     "type": "plan",
+     "plan": true,
+     "title": "Early dinner · unagi at Kawatoyo",
+     "subtitle": "Grilled eel, Narita-san Omotesando",
+     "start": "2026-10-24T15:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Kawatoyo Honten, Narita, Chiba",
+     "icon": "🍱",
+     "card": [
+      [
+       "Payment",
+       "Cash or PayPay only"
+      ],
+      [
+       "Last order",
+       "17:00"
+      ]
+     ],
+     "note": "Fallback: if the queue is too long, skip Kawatoyo, take the 13:51 from Sawara and have eel in Sawara instead."
+    },
+    {
+     "id": "sat-to-airport",
+     "type": "plan",
+     "plan": true,
+     "title": "Keisei Narita → Narita Airport T1 · security · lounge",
+     "subtitle": "~8 min · security ~16:10",
+     "start": "2026-10-24T15:50:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Keisei Narita Station",
+     "card": [
+      [
+       "Train",
+       "Keisei Narita → Narita Airport T1 (~8 min)"
+      ],
+      [
+       "Fare",
+       "¥490"
+      ],
+      [
+       "Security",
+       "~16:10"
+      ],
+      [
+       "Lounge",
+       "Needs Business, Premium Economy or Star Alliance Gold · cabin unconfirmed, check"
+      ]
+     ]
+    },
+    {
      "id": "newotani-out",
      "type": "hotel-checkout",
      "title": "Check out · Hotel New Otani Tokyo Garden Tower",
@@ -163,7 +432,7 @@
      "id": "sq5901",
      "type": "flight",
      "title": "SQ 5901 · Tokyo Narita → Singapore",
-     "subtitle": "NRT T1 18:25 → SIN T2 00:45 (+1) · Boeing 787-9 · Economy · Operated by ANA",
+     "subtitle": "NRT T1 18:25 → SIN T2 00:45 (+1) · Boeing 787-9 · Economy · Operated by Air Japan (NQ/NH 801)",
      "start": "2026-10-24T18:25:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "Narita International Airport Terminal 1",
@@ -191,7 +460,19 @@
       ],
       [
        "Class",
-       "Economy · operated by ANA"
+       "Economy"
+      ],
+      [
+       "Operated by",
+       "Air Japan · NQ/NH 801 · B787-9"
+      ],
+      [
+       "Check-in",
+       "ANA counter · Terminal 1 South Wing · opens 07:00"
+      ],
+      [
+       "Bag drop closes",
+       "17:25 (60 min before departure)"
       ]
      ]
     },
