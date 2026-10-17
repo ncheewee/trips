@@ -71,7 +71,7 @@ function ics(t){const s=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace
  const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trips//EN',all,...ev,'END:VCALENDAR'].join('\r\n');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download=t.id+'.ics';a.click()}
 async function boot(){try{DATA=await (await fetch('data/trips.json',{cache:'no-cache'})).json()}catch(e){}
- const id=P.get('trip');id?trip(id):home();if('serviceWorker'in navigator)navigator.serviceWorker.register('/trips/sw.js',{scope:'/trips/'}).catch(()=>navigator.serviceWorker.register('sw.js'))}
+ const id=P.get('trip');id?trip(id):home();refreshPriv();if('serviceWorker'in navigator)navigator.serviceWorker.register('/trips/sw.js',{scope:'/trips/'}).catch(()=>navigator.serviceWorker.register('sw.js'))}
 boot();
 
 const SCAN={msg:''};
@@ -86,13 +86,22 @@ function copyNow(v,b){let ok=true;try{const p=navigator.clipboard&&navigator.cli
  if(b){b.classList.add('done');b.textContent='Copied ✓';clearTimeout(b._t);b._t=setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1500)}toast('Copied')}
 function fallbackCopy(v){const ta=document.createElement('textarea');ta.value=v;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();let r=false;try{r=document.execCommand('copy')}catch(e){}ta.remove();return r}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;e.preventDefault();copyNow(b.dataset.copy,b)});
-function privMenu(){const el=document.createElement('div');el.className='sheet';const n=Object.keys(priv()).length;
- el.innerHTML=`<form id="pf"><b>Private details</b><div class="su">Stored on this device only (never uploaded). ${n?n+' bookings loaded.':'Nothing imported yet.'}</div>
- <label>Paste JSON<textarea name="j" rows="6" placeholder='{"version":1,"items":{...}}'></textarea></label>
- <label>…or open a file<input type="file" name="f" accept="application/json,.json"></label>
- <div class="row"><button class="btn pri">Import</button>${n?'<button class="btn" type="button" id="pc">Clear</button>':''}<button class="btn" type="button" id="px">Close</button></div></form>`;
+const PASS='trips.pass.v1',b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function decryptPriv(pass){const e=await (await fetch('data/private.enc.json?t='+Date.now(),{cache:'no-store'})).json();
+ const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);
+ const key=await crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:b64(e.salt),iterations:e.iter},base,{name:'AES-GCM',length:256},false,['decrypt']);
+ const j=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(e.iv)},key,b64(e.ct))));if(!j||typeof j.items!=='object')throw 0;return j}
+async function refreshPriv(){if(SHARE)return;const pw=localStorage.getItem(PASS);if(!pw)return;try{const j=await decryptPriv(pw);const cur=localStorage.getItem(PRIV);const n=JSON.stringify(j);if(cur!==n){localStorage.setItem(PRIV,n);rerender()}}catch(e){}}
+function privMenu(){const el=document.createElement('div');el.className='sheet';const n=Object.keys(priv()).length,on=!!localStorage.getItem(PASS);
+ el.innerHTML=`<form id="pu"><b>Private details</b><div class="su">${on?'Unlocked on this device'+(n?' ('+n+' bookings).':'.'):'Enter your passcode once on this device to show confirmation numbers and PINs.'}</div>
+ ${on?'':'<label>Passcode<input name="pw" type="password" autocomplete="current-password" required></label>'}
+ <div class="row">${on?'':'<button class="btn pri">Unlock</button>'}${n||on?'<button class="btn" type="button" id="pc">Lock &amp; clear</button>':''}<button class="btn" type="button" id="px">Close</button></div></form>
+ <details><summary class="su">Import a file instead</summary><form id="pf"><label>Paste JSON<textarea name="j" rows="4" placeholder='{"version":1,"items":{...}}'></textarea></label>
+ <label>…or open a file<input type="file" name="f" accept="application/json,.json"></label><div class="row"><button class="btn">Import</button></div></form></details>`;
  document.body.appendChild(el);const close=()=>el.remove();el.onclick=e=>{if(e.target===el)close()};el.querySelector('#px').onclick=close;
- el.querySelector('#pc')&&(el.querySelector('#pc').onclick=()=>{localStorage.removeItem(PRIV);close();toast('Private details cleared');rerender()});
+ el.querySelector('#pc')&&(el.querySelector('#pc').onclick=()=>{localStorage.removeItem(PRIV);localStorage.removeItem(PASS);close();toast('Private details locked');rerender()});
+ el.querySelector('#pu').onsubmit=async e=>{e.preventDefault();const pw=new FormData(e.target).get('pw');if(!pw)return;
+  try{const j=await decryptPriv(pw);localStorage.setItem(PASS,pw);localStorage.setItem(PRIV,JSON.stringify(j));close();toast('Unlocked '+Object.keys(j.items).length+' bookings');rerender()}catch(_){toast('Wrong passcode')}};
  el.querySelector('#pf').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);let txt=fd.get('j');const f=fd.get('f');if(f&&f.size)txt=await f.text();
   try{const j=JSON.parse(txt);if(!j||typeof j.items!=='object')throw 0;localStorage.setItem(PRIV,JSON.stringify(j));close();toast('Imported '+Object.keys(j.items).length+' bookings');rerender()}catch(_){toast('Not valid private-details JSON')}}}
 const PK='trips.pack.v1';const packAll=()=>{try{return JSON.parse(localStorage.getItem(PK)||'{}')}catch(e){return{}}};
