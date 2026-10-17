@@ -101,6 +101,47 @@
      "allTrip": true
     },
     {
+     "id": "manten-hibiya",
+     "type": "food",
+     "icon": "🍣",
+     "title": "Dinner · Manten Sushi Hibiya",
+     "subtitle": "【Counter】 Omakase Course (120 min) · 1 person",
+     "start": "2026-10-22T21:00:00+09:00",
+     "end": "2026-10-22T23:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "1-7-1 Uchisaiwai-cho, Hibiya OKUROJI G24, Chiyoda-ku, Tokyo 100-0011",
+     "phone": "+81368112300",
+     "phoneDisplay": "+81 3-6811-2300",
+     "provider": "TableCheck",
+     "note": "Before dinner: gym 5:30pm (Garden Tower 21F, free, 24h) → Ginza line 6:50pm → Mitsukoshi, Matsuya, Itoya (close 8pm), Ginza Six (8:30pm), Uniqlo / Muji / Loft (9pm), Bic Camera Yurakucho (10pm). Don Quijote Ginza (24h) is next door after dinner.",
+     "card": [
+      [
+       "Time",
+       "Thu 22 Oct · 21:00–23:00 JST"
+      ],
+      [
+       "Seat",
+       "Counter · 1 person"
+      ],
+      [
+       "Course",
+       "Omakase (120 min)"
+      ],
+      [
+       "Last entry",
+       "21:30"
+      ],
+      [
+       "Payment",
+       "Cashless · card only"
+      ],
+      [
+       "Getting there",
+       "Ginza line Akasaka-mitsuke → Ginza (~10 min), then ~6 min walk (or Shimbashi)"
+      ]
+     ]
+    },
+    {
      "id": "newotani-out",
      "type": "hotel-checkout",
      "title": "Check out · Hotel New Otani Tokyo Garden Tower",

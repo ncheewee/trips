@@ -34,7 +34,7 @@ function itemHTML(it,t){const tz=it.tz||t.timezone,o=SHARE?{}:(owner()[it.id]||{
  if(it.address)rows.push(['Address',it.address,0,'map']);
  if(it.phone&&!SHARE)rows.push(['Phone',it.phoneDisplay||it.phone,0,'tel',it.phone]);
  const row=([k,v,p,kind,raw])=>`<div class="cr${p?' pv':''}"><span class="ck">${p?'🔒 ':''}${esc(k)}</span><span class="cv">${kind==='map'?`<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}">${esc(v)}</a>`:kind==='tel'?`<a href="tel:${esc(raw)}">${esc(v)}</a>`:esc(v)}</span><button class="cp" type="button" data-copy="${esc(v)}" aria-label="Copy ${esc(k)}">Copy</button></div>`;
- return `<div class="item ${it.allTrip?'all':''}"><span class="dot">${ICON[it.type]||'•'}</span>
+ return `<div class="item ${it.allTrip?'all':''}"><span class="dot">${it.icon||ICON[it.type]||'•'}</span>
  <div class="tm">${it.allTrip?'Throughout the trip':fmtTime(it.start,tz)}${it.provider&&!SHARE?' · '+esc(it.provider):''}</div>
  <div class="ti">${esc(it.title)}</div>${it.subtitle?`<div class="su">${esc(it.subtitle)}</div>`:''}
  ${rows.length?`<div class="ccard">${rows.map(row).join('')}</div>`:''}
@@ -66,7 +66,7 @@ function form(t){$('#form').innerHTML=`<form id="f"><label>Type<select name="typ
   Object.keys(it).forEach(k=>it[k]===''&&delete it[k]);const l=local();(l[t.id]=l[t.id]||[]).push(it);saveLocal(l);
   if(f.notes){const o=owner();o[it.id]={notes:f.notes};localStorage.setItem(OWN,JSON.stringify(o))}toast('Saved');trip(t.id)}}
 function ics(t){const s=d=>new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');const e=x=>String(x||'').replace(/[,;\\]/g,m=>'\\'+m).replace(/\n/g,'\\n');
- const ev=t.items.filter(i=>i.start&&!i.allTrip).map(i=>['BEGIN:VEVENT',`UID:${i.id}@trips`,`DTSTAMP:${s(Date.now())}`,`DTSTART:${s(i.start)}`,`DTEND:${s(new Date(i.start).getTime()+36e5)}`,`SUMMARY:${e(i.title)}`,i.address?`LOCATION:${e(i.address)}`:'',`DESCRIPTION:${e([i.subtitle,SHARE?'':i.confirmation&&'Conf '+i.confirmation].filter(Boolean).join('\n'))}`,'END:VEVENT'].filter(Boolean).join('\r\n'));
+ const ev=t.items.filter(i=>i.start&&!i.allTrip).map(i=>['BEGIN:VEVENT',`UID:${i.id}@trips`,`DTSTAMP:${s(Date.now())}`,`DTSTART:${s(i.start)}`,`DTEND:${s(i.end||new Date(i.start).getTime()+36e5)}`,`SUMMARY:${e(i.title)}`,i.address?`LOCATION:${e(i.address)}`:'',`DESCRIPTION:${e([i.subtitle,SHARE?'':i.confirmation&&'Conf '+i.confirmation].filter(Boolean).join('\n'))}`,'END:VEVENT'].filter(Boolean).join('\r\n'));
  const all=['BEGIN:VEVENT',`UID:${t.id}@trips`,`DTSTAMP:${s(Date.now())}`,`DTSTART;VALUE=DATE:${t.start.replace(/-/g,'')}`,`DTEND;VALUE=DATE:${(()=>{const d=new Date(t.end+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+1);return d.toISOString().slice(0,10).replace(/-/g,'')})()}`,`SUMMARY:${e(t.title)}`,'END:VEVENT'].join('\r\n');
  const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trips//EN',all,...ev,'END:VCALENDAR'].join('\r\n');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download=t.id+'.ics';a.click()}
