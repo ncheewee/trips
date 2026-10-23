@@ -76,7 +76,7 @@
      "phone": "+81332651111",
      "phoneDisplay": "+81 3-3265-1111",
      "provider": "Booking.com",
-     "note": "Near Sanno Park Tower (work), ~10 min",
+     "note": "Near Sanno Park Tower (work), ~10 min. Checkout Sat morning for Karuizawa; main luggage stays at New Otani until Sun return.",
      "card": [
       [
        "Check-in",
@@ -84,7 +84,7 @@
       ],
       [
        "Check-out",
-       "Sat 24 Oct · by 12:00"
+       "Sat 24 Oct · by 11:00 (leave ~08:00 for Karuizawa)"
       ],
       [
        "Room",
@@ -142,280 +142,64 @@
      ]
     },
     {
-     "id": "sat-plan-day",
+     "id": "kz-plan-day",
      "type": "plan",
      "plan": true,
-     "title": "Saturday half-day plan · Narita, Sawara & Narita-san",
+     "title": "Weekend plan · Karuizawa overnight",
      "subtitle": "Tentative · adjust as you go",
-     "start": "2026-10-24T06:00:00+09:00",
+     "start": "2026-10-24T07:30:00+09:00",
      "tz": "Asia/Tokyo",
      "card": [
       [
-       "Cash",
-       "Carry about ¥15–20k · boat is cash only, Kawatoyo cash or PayPay"
+       "Order",
+       "Leave New Otani (bags stay) → Tokyo Station → Asama to Karuizawa → Old Karuizawa + Kumoba Pond → hostel overnight → Shiraito Falls Sun morning → Asama back ~15:00–16:00 → pick up bags"
       ],
       [
-       "Weather",
-       "Check the forecast. Typhoon season can stop the Sawara boat"
+       "Budget",
+       "Trains ~¥12k RT reserved + hostel ~¥10–12k + food/local ¥10–15k ≈ ¥32–40k"
       ],
       [
        "Flight",
-       "SQ 5901 · NRT T1 18:25 → SIN T2 00:45 (+1)"
+       "SQ 5901 Sat may be superseded — confirm Sunday return before locking trains"
       ]
      ],
-     "note": "Order: check out → Skyliner to Narita → early bag drop → JR to Sawara → lunch → back to Narita → Kawatoyo + Naritasan → airport."
+     "note": "Foliage usually mid-Oct into early Nov. Bring AE-1 if bought. Hostel / budget near Karuizawa Station · TBD under ~¥10–12k. Main luggage stays at New Otani."
     },
     {
-     "id": "sat-checkout",
+     "id": "kz-checkout-metro",
      "type": "plan",
      "plan": true,
-     "title": "Check out · Hotel New Otani (early)",
-     "subtitle": "Main Building front desk (24h)",
-     "start": "2026-10-24T06:30:00+09:00",
+     "title": "Checkout New Otani → Tokyo Station",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T08:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "4-1 Kioicho, Chiyoda-ku, Tokyo 102-8578",
      "card": [
       [
-       "Before 08:00",
-       "Main Building front desk · open 24h"
+       "Leave",
+       "~08:00 · light overnight bag only"
       ],
       [
-       "Garden Tower desk",
-       "Opens 08:00"
-      ]
-     ]
-    },
-    {
-     "id": "sat-skyliner",
-     "type": "plan",
-     "plan": true,
-     "title": "Ginza line → Ueno, then Keisei Skyliner → Narita T1",
-     "subtitle": "Akasaka-mitsuke 06:45 → Ueno (~17 min) · Skyliner ~07:20 → Narita T1 ~08:05",
-     "start": "2026-10-24T06:45:00+09:00",
-     "tz": "Asia/Tokyo",
-     "card": [
-      [
-       "Leg 1",
-       "Ginza line Akasaka-mitsuke → Ueno (~17 min)"
+       "Main luggage",
+       "Stays at New Otani until Sunday afternoon — ask desk"
       ],
       [
-       "Leg 2",
-       "Keisei Skyliner Ueno ~07:20 → Narita Airport T1 (~41 min)"
+       "Metro",
+       "Ginza or Marunouchi line from Akasaka-mitsuke → Tokyo Station (~20–30 min)"
       ],
       [
-       "Skyliner fare",
-       "¥2,470"
-      ],
-      [
-       "Arrive",
-       "~08:05 · Narita Terminal 1"
+       "Buffer",
+       "Aim Tokyo Station by ~08:40 for 09:04 Asama (or earlier for 08:00)"
       ]
      ],
-     "note": "Skyliner departs Keisei Ueno station (short walk from Ginza line Ueno)."
-    },
-    {
-     "id": "sat-bagdrop",
-     "type": "plan",
-     "plan": true,
-     "title": "Early bag drop · ANA counter, Narita T1 South Wing",
-     "subtitle": "SQ 5901 operated by Air Japan (NQ/NH 801) · counters open 07:00",
-     "start": "2026-10-24T08:10:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Narita International Airport Terminal 1, South Wing",
-     "card": [
-      [
-       "Counter",
-       "ANA · Terminal 1 South Wing"
-      ],
-      [
-       "Opens",
-       "07:00 (all flights)"
-      ],
-      [
-       "Bag drop closes",
-       "17:25 (60 min before 18:25)"
-      ],
-      [
-       "Flight",
-       "SQ 5901 = Air Japan NQ/NH 801 · B787-9 · NRT 18:25 → SIN T2 00:45 (+1)"
-      ],
-      [
-       "Backup",
-       "Coin lockers (large ¥800/day) or JAL ABC storage (¥1,000/day)"
-      ]
-     ],
-     "note": "To confirm: early check-in works on the CWT ticket."
-    },
-    {
-     "id": "sat-jr-sawara",
-     "type": "plan",
-     "plan": true,
-     "title": "JR Narita → Sawara",
-     "subtitle": "Narita Airport → JR Narita ~09:00 · 09:40 → Sawara ~10:10",
-     "start": "2026-10-24T09:40:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "JR Narita Station",
-     "card": [
-      [
-       "Train",
-       "JR Narita 09:40 → Sawara ~10:10 (~31 min)"
-      ],
-      [
-       "Fare",
-       "¥510"
-      ],
-      [
-       "Before",
-       "~09:00 from airport to JR Narita station"
-      ]
-     ]
-    },
-    {
-     "id": "sat-sawara",
-     "type": "plan",
-     "plan": true,
-     "title": "Explore Sawara · canal boat, Ino Tadataka, Baba Honten",
-     "subtitle": "Edo-era canal town",
-     "start": "2026-10-24T10:15:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Sawara, Katori, Chiba",
-     "card": [
-      [
-       "Canal boat",
-       "30 min · ¥1,300 cash · 10:00–15:30 (Oct) · weather-dependent"
-      ],
-      [
-       "Ino Tadataka house & museum",
-       "09:00–16:30"
-      ],
-      [
-       "Baba Honten",
-       "Sake brewery"
-      ]
-     ],
-     "note": "Boat may not run in bad weather; museum and brewery are the fallback."
-    },
-    {
-     "id": "sat-lunch",
-     "type": "plan",
-     "plan": true,
-     "title": "Lunch · Koboriya soba, Sawara",
-     "subtitle": "Classic soba in Sawara",
-     "start": "2026-10-24T11:45:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Koboriya, Sawara, Katori, Chiba",
-     "icon": "🍜",
-     "card": [
-      [
-       "Hours",
-       "11:00–16:30 · closed Wed"
-      ]
-     ]
-    },
-    {
-     "id": "sat-jr-back",
-     "type": "plan",
-     "plan": true,
-     "title": "JR Sawara → Narita",
-     "subtitle": "Sawara 12:53 → Narita 13:24",
-     "start": "2026-10-24T12:53:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "JR Sawara Station",
-     "card": [
-      [
-       "Train",
-       "Sawara 12:53 → Narita 13:24"
-      ],
-      [
-       "Later trains",
-       "13:51 · 14:52"
-      ]
-     ]
-    },
-    {
-     "id": "sat-naritasan",
-     "type": "plan",
-     "plan": true,
-     "title": "Narita-san · put name down at Kawatoyo, walk Omotesando to Shinshoji",
-     "subtitle": "Kawatoyo first, then temple",
-     "start": "2026-10-24T13:30:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Kawatoyo Honten, Narita, Chiba",
-     "card": [
-      [
-       "Kawatoyo",
-       "Unagi · 10:00–17:00 (last order) · cash or PayPay only"
-      ],
-      [
-       "Saturday queue",
-       "60–90 min · give your name first"
-      ],
-      [
-       "Omotesando",
-       "Old shopping street down to the temple"
-      ],
-      [
-       "Naritasan Shinshoji",
-       "Grounds 06:00–16:00"
-      ]
-     ]
-    },
-    {
-     "id": "sat-unagi",
-     "type": "plan",
-     "plan": true,
-     "title": "Early dinner · unagi at Kawatoyo",
-     "subtitle": "Grilled eel, Narita-san Omotesando",
-     "start": "2026-10-24T15:00:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Kawatoyo Honten, Narita, Chiba",
-     "icon": "🍱",
-     "card": [
-      [
-       "Payment",
-       "Cash or PayPay only"
-      ],
-      [
-       "Last order",
-       "17:00"
-      ]
-     ],
-     "note": "Fallback: if the queue is too long, skip Kawatoyo, take the 13:51 from Sawara and have eel in Sawara instead."
-    },
-    {
-     "id": "sat-to-airport",
-     "type": "plan",
-     "plan": true,
-     "title": "Keisei Narita → Narita Airport T1 · security · lounge",
-     "subtitle": "~8 min · security ~16:10",
-     "start": "2026-10-24T15:50:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Keisei Narita Station",
-     "card": [
-      [
-       "Train",
-       "Keisei Narita → Narita Airport T1 (~8 min)"
-      ],
-      [
-       "Fare",
-       "¥490"
-      ],
-      [
-       "Security",
-       "~16:10"
-      ],
-      [
-       "Lounge",
-       "Needs Business, Premium Economy or Star Alliance Gold · cabin unconfirmed, check"
-      ]
-     ]
+     "note": "Travel light. Confirm New Otani will hold main luggage until Sun return from Karuizawa."
     },
     {
      "id": "newotani-out",
      "type": "hotel-checkout",
      "title": "Check out · Hotel New Otani Tokyo Garden Tower",
-     "subtitle": "Check-out by 12:00",
-     "start": "2026-10-24T12:00:00+09:00",
+     "subtitle": "Morning leave · hotel allows until 11:00",
+     "start": "2026-10-24T08:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "4-1 Kioicho, Chiyoda-ku, Tokyo 102-8578",
      "phone": "+81332651111",
@@ -423,21 +207,240 @@
      "provider": "Booking.com",
      "card": [
       [
-       "Check-out",
-       "Sat 24 Oct · by 12:00"
+       "Leave",
+       "Sat 24 Oct · ~08:00 for Asama to Karuizawa"
+      ],
+      [
+       "Hotel policy",
+       "Checkout allowed until 11:00"
+      ],
+      [
+       "Main luggage",
+       "Leave at New Otani · ask desk to hold until Sun afternoon"
+      ],
+      [
+       "Take",
+       "Light overnight bag only"
+      ]
+     ],
+     "note": "Normal morning checkout for Karuizawa (not the old 06:30 early checkout). Travel light; main bags stay in Tokyo."
+    },
+    {
+     "id": "kz-asama-out",
+     "type": "plan",
+     "plan": true,
+     "title": "Asama 605 · Tokyo → Karuizawa",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T09:04:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Tokyo Station (Shinkansen)",
+     "card": [
+      [
+       "Train",
+       "Asama 605 · Tokyo 09:04 → Karuizawa ~10:10"
+      ],
+      [
+       "Alt",
+       "Asama 679 · Tokyo 08:00 → Karuizawa ~09:06"
+      ],
+      [
+       "Fare",
+       "Reserved seat ~¥6,130 one way"
+      ],
+      [
+       "Book",
+       "JR East / Eki-net or station ticket office"
+      ]
+     ],
+     "note": "Round-trip reserved ~¥12k. Book seats once hotel is set."
+    },
+    {
+     "id": "kz-hotel-drop",
+     "type": "plan",
+     "plan": true,
+     "title": "Hostel bag drop · near Karuizawa Station",
+     "subtitle": "Tentative · hostel / budget TBD under ~¥10–12k",
+     "start": "2026-10-24T10:20:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Karuizawa Station area, Nagano",
+     "card": [
+      [
+       "Stay",
+       "Hostel / budget near Karuizawa Station · TBD under ~¥10–12k"
+      ],
+      [
+       "Not",
+       "Skip mid-range (~¥20k+) · keep under ~¥10–12k"
+      ],
+      [
+       "Do",
+       "Drop overnight bag, then head out light"
+      ],
+      [
+       "Luggage",
+       "Main bags remain at New Otani Tokyo"
+      ]
+     ],
+     "note": "Placeholder · pick a cheap hostel/budget walkable to the station. Main luggage stays in Tokyo."
+    },
+    {
+     "id": "kz-old-ginza",
+     "type": "plan",
+     "plan": true,
+     "title": "Old Karuizawa Ginza · lunch",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T11:30:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Old Karuizawa Ginza street, Karuizawa, Nagano",
+     "card": [
+      [
+       "How",
+       "Walk or local bus from Karuizawa Station"
+      ],
+      [
+       "Lunch",
+       "Somewhere on Old Karuizawa Ginza"
+      ],
+      [
+       "Vibe",
+       "Highland shopping street · good for a slow wander"
       ]
      ]
+    },
+    {
+     "id": "kz-kumoba",
+     "type": "plan",
+     "plan": true,
+     "title": "Kumoba Pond loop · foliage + film",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T14:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Kumoba Pond (雲場池), Karuizawa, Nagano",
+     "card": [
+      [
+       "Walk",
+       "Easy loop around the pond"
+      ],
+      [
+       "Photos",
+       "Bring AE-1 if bought · autumn foliage window"
+      ],
+      [
+       "Season",
+       "Usually mid-Oct into early Nov"
+      ]
+     ],
+     "note": "Quiet spot after Old Karuizawa — good solo afternoon."
+    },
+    {
+     "id": "kz-evening",
+     "type": "plan",
+     "plan": true,
+     "title": "Check-in · bath · dinner",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-24T17:30:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Karuizawa Station / Old Karuizawa area",
+     "card": [
+      [
+       "Check-in",
+       "Hostel / budget TBD · under ~¥10–12k near station"
+      ],
+      [
+       "Bath",
+       "If available at hostel"
+      ],
+      [
+       "Dinner",
+       "Near station or Old Karuizawa"
+      ]
+     ],
+     "note": "Cheap overnight only — main luggage is in Tokyo."
+    },
+    {
+     "id": "kz-shiraito",
+     "type": "plan",
+     "plan": true,
+     "title": "Kusakyu bus · Shiraito Falls",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-25T09:20:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Shiraito Falls (白糸の滝), Karuizawa, Nagano",
+     "card": [
+      [
+       "Out",
+       "Kusakyu bus Karuizawa Station ~09:20 → Shiraito Falls ~09:43"
+      ],
+      [
+       "Do",
+       "Walk the falls · short visit"
+      ],
+      [
+       "Back",
+       "Return bus mid-morning (confirm same-day timetable)"
+      ]
+     ],
+     "note": "Confirm Kusakyu Sunday morning times the day before; autumn weekends can be busy."
+    },
+    {
+     "id": "kz-lunch-sun",
+     "type": "plan",
+     "plan": true,
+     "title": "Lunch near station · optional Prince Shopping Plaza",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-25T12:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Karuizawa Station / Prince Shopping Plaza",
+     "card": [
+      [
+       "Lunch",
+       "Near Karuizawa Station"
+      ],
+      [
+       "Optional",
+       "Prince Shopping Plaza · skip if short on time"
+      ]
+     ]
+    },
+    {
+     "id": "kz-asama-back",
+     "type": "plan",
+     "plan": true,
+     "title": "Asama · Karuizawa → Tokyo",
+     "subtitle": "Tentative · adjust as you go",
+     "start": "2026-10-25T14:00:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Karuizawa Station (Shinkansen)",
+     "card": [
+      [
+       "Aim",
+       "Arrive Tokyo ~15:00–16:00 · buffer for Sunday evening"
+      ],
+      [
+       "Fare",
+       "Reserved ~¥6,130 one way · RT ~¥12k with outbound"
+      ],
+      [
+       "Book",
+       "JR East / Eki-net or station"
+      ]
+     ],
+     "note": "Pick a specific Asama once you know hotel checkout and Shiraito bus return. Leave buffer for evening plans / possible Sunday flight."
     },
     {
      "id": "sq5901",
      "type": "flight",
      "title": "SQ 5901 · Tokyo Narita → Singapore",
-     "subtitle": "NRT T1 18:25 → SIN T2 00:45 (+1) · Boeing 787-9 · Economy · Operated by Air Japan (NQ/NH 801)",
+     "subtitle": "SUPERSEDED? · was NRT T1 18:25 Sat → SIN 00:45 · trip extended through Sun evening — confirm rebooking",
      "start": "2026-10-24T18:25:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "Narita International Airport Terminal 1",
      "provider": "Singapore Airlines",
      "card": [
+      [
+       "Status",
+       "Possibly superseded · confirm Sunday return"
+      ],
       [
        "Departs",
        "Sat 24 Oct · 18:25 JST"
@@ -474,13 +477,14 @@
        "Bag drop closes",
        "17:25 (60 min before departure)"
       ]
-     ]
+     ],
+     "note": "Trip extended through Sunday evening 25 Oct. This Saturday departure may have been moved or cancelled. Confirm with SQ / CWT before relying on it."
     },
     {
      "id": "sq5901-arr",
      "type": "flight",
      "title": "Arrive Singapore (SQ 5901)",
-     "subtitle": "Changi Airport Terminal 2",
+     "subtitle": "Was Changi T2 · confirm if flight moved to Sunday",
      "start": "2026-10-25T00:45:00+08:00",
      "tz": "Asia/Singapore",
      "address": "Singapore Changi Airport Terminal 2",
@@ -494,7 +498,8 @@
        "Terminal",
        "Changi Terminal 2"
       ]
-     ]
+     ],
+     "note": "Paired with SQ 5901 Sat departure — confirm rebooking if return moved to Sun evening."
     }
    ],
    "image": "img/tokyo",
