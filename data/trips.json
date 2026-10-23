@@ -13,7 +13,7 @@
      "id": "sq632",
      "type": "flight",
      "title": "SQ 632 · Singapore → Tokyo Haneda",
-     "subtitle": "SIN T2 07:40 → HND T3 15:45 · Airbus A350-900 · Economy",
+     "subtitle": "SIN → HND · Economy",
      "start": "2026-10-18T07:40:00+08:00",
      "tz": "Asia/Singapore",
      "address": "Singapore Changi Airport Terminal 2",
@@ -24,71 +24,45 @@
        "Sun 18 Oct · 07:40 SGT"
       ],
       [
-       "From",
-       "Singapore Changi (SIN) · Terminal 2"
-      ],
-      [
        "Arrives",
        "Sun 18 Oct · 15:45 JST"
       ],
       [
-       "To",
-       "Tokyo Haneda (HND) · Terminal 3"
-      ],
-      [
        "Seat",
        "44E"
-      ],
-      [
-       "Class",
-       "Economy"
       ]
      ]
     },
     {
      "id": "sq632-arr",
      "type": "flight",
-     "title": "Arrive Tokyo Haneda (SQ 632)",
-     "subtitle": "Haneda Airport Terminal 3",
+     "title": "Arrive Haneda",
+     "subtitle": "SQ 632 · Terminal 3",
      "start": "2026-10-18T15:45:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "Tokyo Haneda Airport Terminal 3",
-     "provider": "Singapore Airlines",
-     "card": [
-      [
-       "Arrives",
-       "Sun 18 Oct · 15:45 JST"
-      ],
-      [
-       "Terminal",
-       "Haneda Terminal 3"
-      ]
-     ]
+     "provider": "Singapore Airlines"
     },
     {
      "id": "newotani-in",
      "type": "hotel-checkin",
-     "title": "Check in · Hotel New Otani Tokyo Garden Tower",
-     "subtitle": "Garden Tower Standard Double Room, Non-Smoking",
+     "title": "Hotel New Otani",
+     "subtitle": "Garden Tower · Standard Double",
      "start": "2026-10-18T15:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "4-1 Kioicho, Chiyoda-ku, Tokyo 102-8578",
      "phone": "+81332651111",
      "phoneDisplay": "+81 3-3265-1111",
      "provider": "Booking.com",
-     "note": "Near Sanno Park Tower (work), ~10 min. Checkout Sat 24 for Hotel Gracery Ginza; luggage moves with you (or hotel hold if needed before 14:00 Ginza check-in).",
+     "note": "Near Sanno Park Tower · ~10 min",
      "card": [
       [
-       "Check-in",
-       "Sun 18 Oct · from 15:00"
+       "From",
+       "Sun 18 Oct · 15:00"
       ],
       [
-       "Check-out",
-       "Sat 24 Oct · by 11:00 → Hotel Gracery Ginza (from 14:00)"
-      ],
-      [
-       "Room",
-       "Garden Tower Standard Double, non-smoking"
+       "Until",
+       "Sat 24 Oct · 11:00"
       ]
      ]
     },
@@ -104,8 +78,8 @@
      "id": "manten-hibiya",
      "type": "food",
      "icon": "🍣",
-     "title": "Dinner · Manten Sushi Hibiya",
-     "subtitle": "【Counter】 Omakase Course (120 min) · 1 person",
+     "title": "Manten Sushi Hibiya",
+     "subtitle": "Counter omakase",
      "start": "2026-10-22T21:00:00+09:00",
      "end": "2026-10-22T23:00:00+09:00",
      "tz": "Asia/Tokyo",
@@ -113,70 +87,35 @@
      "phone": "+81368112300",
      "phoneDisplay": "+81 3-6811-2300",
      "provider": "TableCheck",
-     "note": "Before dinner: gym 5:30pm (Garden Tower 21F, free, 24h) → Ginza line 6:50pm → Mitsukoshi, Matsuya, Itoya (close 8pm), Ginza Six (8:30pm), Uniqlo / Muji / Loft (9pm), Bic Camera Yurakucho (10pm). Don Quijote Ginza (24h) is next door after dinner.",
+     "note": "Ginza line · ~10 min from Akasaka-mitsuke",
      "card": [
       [
-       "Time",
-       "Thu 22 Oct · 21:00–23:00 JST"
-      ],
-      [
-       "Seat",
-       "Counter · 1 person"
-      ],
-      [
-       "Course",
-       "Omakase (120 min)"
-      ],
-      [
-       "Last entry",
-       "21:30"
+       "When",
+       "Thu 22 Oct · 21:00"
       ],
       [
        "Payment",
-       "Cashless · card only"
-      ],
-      [
-       "Getting there",
-       "Ginza line Akasaka-mitsuke → Ginza (~10 min), then ~6 min walk (or Shimbashi)"
+       "Cashless"
       ]
      ]
     },
     {
      "id": "newotani-out",
      "type": "hotel-checkout",
-     "title": "Check out · Hotel New Otani Tokyo Garden Tower",
-     "subtitle": "By 11:00 · then Hotel Gracery Ginza (from 14:00)",
+     "title": "Leave New Otani",
+     "subtitle": "→ Gracery Ginza",
      "start": "2026-10-24T11:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "4-1 Kioicho, Chiyoda-ku, Tokyo 102-8578",
      "phone": "+81332651111",
      "phoneDisplay": "+81 3-3265-1111",
-     "provider": "Booking.com",
-     "card": [
-      [
-       "Leave",
-       "Sat 24 Oct · by 11:00"
-      ],
-      [
-       "Hotel policy",
-       "Checkout allowed until 11:00"
-      ],
-      [
-       "Next",
-       "Hotel Gracery Ginza · check-in from 14:00"
-      ],
-      [
-       "Luggage",
-       "Takes with you to Ginza (or short hold if needed)"
-      ]
-     ],
-     "note": "Checkout Sat 24 by 11:00, then Hotel Gracery Ginza (from 14:00)."
+     "provider": "Booking.com"
     },
     {
      "id": "gracery-ginza-in",
      "type": "hotel-checkin",
-     "title": "Check in · Hotel Gracery Ginza",
-     "subtitle": "Standard Single Room · Non-Smoking · 1 night",
+     "title": "Hotel Gracery Ginza",
+     "subtitle": "Standard Single",
      "start": "2026-10-24T14:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "Tokyo-to, Tokyo, Chuo-ku Ginza 7-10-1, Japan",
@@ -184,88 +123,35 @@
      "phoneDisplay": "+81 3-6858-1011",
      "provider": "Booking.com",
      "confirmation": "6319209140",
-     "note": "Chill Ginza Sat. Nearest metro Exit A3 Ginza. Then Mitsui Garden Nihonbashi Sun.",
+     "note": "Exit A3 Ginza",
      "card": [
       [
-       "Check-in",
-       "Sat 24 Oct · from 14:00"
+       "From",
+       "Sat 24 Oct · 14:00"
       ],
       [
-       "Check-out",
-       "Sun 25 Oct · until 11:00"
-      ],
-      [
-       "Room",
-       "Standard Single · non-smoking · 1 adult"
-      ],
-      [
-       "Confirmation",
-       "6319209140"
-      ],
-      [
-       "Metro",
-       "Ginza Station Exit A3"
+       "Until",
+       "Sun 25 Oct · 11:00"
       ]
      ]
     },
     {
-     "id": "ginza-chill-sat",
-     "type": "plan",
-     "plan": true,
-     "title": "Chill afternoon · Ginza alleys & cafés",
-     "subtitle": "Covered shopping · side streets · no rush",
-     "start": "2026-10-24T15:00:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Ginza, Chuo-ku, Tokyo",
-     "card": [
-      [
-       "Vibe",
-       "Rainy chill day — department stores, Ginza Six, Namiki / Suzuran side streets"
-      ],
-      [
-       "Cafés",
-       "Old kissaten / upstairs seats (e.g. Tricolore, Café de L’Ambre)"
-      ],
-      [
-       "Evening",
-       "Easy dinner nearby · early night"
-      ]
-     ],
-     "note": "Optional plan. Stay under roofs; alleys are polished side streets, not maze nightlife."
-    },
-    {
      "id": "gracery-ginza-out",
      "type": "hotel-checkout",
-     "title": "Check out · Hotel Gracery Ginza",
-     "subtitle": "By 11:00 · then Mitsui Garden Nihonbashi (from 15:00)",
+     "title": "Leave Gracery Ginza",
+     "subtitle": "→ Mitsui Nihonbashi",
      "start": "2026-10-25T11:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "Tokyo-to, Tokyo, Chuo-ku Ginza 7-10-1, Japan",
      "phone": "+81368581011",
      "phoneDisplay": "+81 3-6858-1011",
-     "provider": "Booking.com",
-     "confirmation": "6319209140",
-     "card": [
-      [
-       "Check-out",
-       "Sun 25 Oct · until 11:00"
-      ],
-      [
-       "Next",
-       "Mitsui Garden Hotel Nihonbashi Premier · from 15:00"
-      ],
-      [
-       "Move",
-       "Short hop — one stop / walk or taxi to Nihonbashi"
-      ]
-     ],
-     "note": "Short move to Mitsui Garden Nihonbashi Premier. Luggage with you."
+     "provider": "Booking.com"
     },
     {
      "id": "mitsui-nihonbashi-in",
      "type": "hotel-checkin",
-     "title": "Check in · Mitsui Garden Hotel Nihonbashi Premier",
-     "subtitle": "Standard Double Room · 3 nights",
+     "title": "Mitsui Garden Nihonbashi Premier",
+     "subtitle": "Standard Double",
      "start": "2026-10-25T15:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "103-0022 Tokyo-to, Chuo-ku, Nihonbashi Muromachi 3-4-4, Japan",
@@ -273,123 +159,29 @@
      "phoneDisplay": "+81 3-3270-1131",
      "provider": "Booking.com",
      "confirmation": "1292306490854143940",
-     "note": "Chill base Sun–Wed. Breakfast available at property. Walkable to Tokyo Station / Coredo.",
+     "note": "Tokyo Station / Coredo",
      "card": [
       [
-       "Check-in",
-       "Sun 25 Oct · 15:00–00:00"
+       "From",
+       "Sun 25 Oct · 15:00"
       ],
       [
-       "Check-out",
+       "Until",
        "Wed 28 Oct · 12:00"
-      ],
-      [
-       "Room",
-       "Standard Double · 3 nights · 1 adult"
-      ],
-      [
-       "Confirmation",
-       "1292306490854143940"
-      ],
-      [
-       "Check-in number",
-       "284-7545876"
-      ],
-      [
-       "Breakfast",
-       "Available at property"
-      ],
-      [
-       "Provider",
-       "Booking.com (partner Bedsonline)"
       ]
      ]
     },
     {
      "id": "mitsui-nihonbashi-out",
      "type": "hotel-checkout",
-     "title": "Check out · Mitsui Garden Hotel Nihonbashi Premier",
-     "subtitle": "By 12:00 · return flight TBD",
+     "title": "Leave Mitsui Nihonbashi",
+     "subtitle": "Checkout by 12:00",
      "start": "2026-10-28T12:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "103-0022 Tokyo-to, Chuo-ku, Nihonbashi Muromachi 3-4-4, Japan",
      "phone": "+81332701131",
      "phoneDisplay": "+81 3-3270-1131",
-     "provider": "Booking.com",
-     "confirmation": "1292306490854143940",
-     "card": [
-      [
-       "Check-out",
-       "Wed 28 Oct · 12:00"
-      ],
-      [
-       "Return flight",
-       "TBD · watching for new booking"
-      ]
-     ],
-     "note": "Trip end Wed 28 Oct. Return flight not confirmed yet."
-    },
-    {
-     "id": "sq5901",
-     "type": "flight",
-     "title": "SQ 5901 · Tokyo Narita → Singapore",
-     "subtitle": "SUPERSEDED · was NRT T1 18:25 Sat → SIN 00:45 · trip extended through Wed 28 Oct — return flight TBD / watching",
-     "start": "2026-10-24T18:25:00+09:00",
-     "tz": "Asia/Tokyo",
-     "address": "Narita International Airport Terminal 1",
-     "provider": "Singapore Airlines",
-     "card": [
-      [
-       "Status",
-       "Superseded · trip extended through Wed 28 Oct"
-      ],
-      [
-       "Original departs",
-       "Sat 24 Oct · 18:25 JST"
-      ],
-      [
-       "From",
-       "Tokyo Narita (NRT) · Terminal 1"
-      ],
-      [
-       "Original arrives",
-       "Sun 25 Oct · 00:45 SGT"
-      ],
-      [
-       "To",
-       "Singapore Changi (SIN) · Terminal 2"
-      ],
-      [
-       "New return",
-       "TBD · watching for new booking"
-      ],
-      [
-       "Operated by",
-       "Air Japan · NQ/NH 801 · B787-9"
-      ]
-     ],
-     "note": "Historical / superseded. Trip extended through Wed 28 Oct 2026. Return flight not rebooked yet — watching inbox for new SQ confirmation. Do not rely on this Saturday departure."
-    },
-    {
-     "id": "sq5901-arr",
-     "type": "flight",
-     "title": "Arrive Singapore (SQ 5901)",
-     "subtitle": "Was Changi T2 · superseded · return flight TBD",
-     "start": "2026-10-25T00:45:00+08:00",
-     "tz": "Asia/Singapore",
-     "address": "Singapore Changi Airport Terminal 2",
-     "provider": "Singapore Airlines",
-     "card": [
-      [
-       "Arrives",
-       "Sun 25 Oct · 00:45 SGT"
-      ],
-      [
-       "Terminal",
-       "Changi Terminal 2"
-      ]
-     ],
-     "note": "Paired with superseded SQ 5901 Sat departure. Trip extended through Wed 28 Oct — new return TBD."
+     "provider": "Booking.com"
     }
    ],
    "image": "img/tokyo",
@@ -417,11 +209,7 @@
       },
       {
        "id": "docume-new-otani-confirmation",
-       "text": "New Otani confirmation"
-      },
-      {
-       "id": "docume-mitsui-nihonbashi-confirmation",
-       "text": "Mitsui Garden Nihonbashi confirmation"
+       "text": "Hotel confirmations (New Otani · Gracery · Mitsui)"
       },
       {
        "id": "docume-gracery-ginza-confirmation",
