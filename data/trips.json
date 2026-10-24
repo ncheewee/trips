@@ -175,13 +175,48 @@
      "id": "mitsui-nihonbashi-out",
      "type": "hotel-checkout",
      "title": "Leave Mitsui Nihonbashi",
-     "subtitle": "Checkout by 12:00",
-     "start": "2026-10-28T12:00:00+09:00",
+     "subtitle": "→ Haneda T3",
+     "start": "2026-10-28T06:00:00+09:00",
      "tz": "Asia/Tokyo",
      "address": "103-0022 Tokyo-to, Chuo-ku, Nihonbashi Muromachi 3-4-4, Japan",
      "phone": "+81332701131",
      "phoneDisplay": "+81 3-3270-1131",
      "provider": "Booking.com"
+    },
+    {
+     "id": "sq631",
+     "type": "flight",
+     "title": "SQ 631 · Tokyo Haneda → Singapore",
+     "subtitle": "HND → SIN · Premium Economy",
+     "start": "2026-10-28T08:30:00+09:00",
+     "tz": "Asia/Tokyo",
+     "address": "Tokyo Haneda Airport Terminal 3",
+     "provider": "Singapore Airlines",
+     "confirmation": "FIDH79",
+     "card": [
+      [
+       "Departs",
+       "Wed 28 Oct · 08:30 JST"
+      ],
+      [
+       "Arrives",
+       "Wed 28 Oct · 15:00 SGT"
+      ],
+      [
+       "Seat",
+       "31G"
+      ]
+     ]
+    },
+    {
+     "id": "sq631-arr",
+     "type": "flight",
+     "title": "Arrive Changi",
+     "subtitle": "SQ 631",
+     "start": "2026-10-28T15:00:00+08:00",
+     "tz": "Asia/Singapore",
+     "address": "Singapore Changi Airport",
+     "provider": "Singapore Airlines"
     }
    ],
    "image": "img/tokyo",
@@ -205,15 +240,11 @@
       },
       {
        "id": "docume-flight-details-sq-632-sq",
-       "text": "Flight details (SQ 632 · return TBD)"
+       "text": "Flight details (SQ 632 · SQ 631)"
       },
       {
        "id": "docume-new-otani-confirmation",
        "text": "Hotel confirmations (New Otani · Gracery · Mitsui)"
-      },
-      {
-       "id": "docume-gracery-ginza-confirmation",
-       "text": "Hotel Gracery Ginza confirmation"
       },
       {
        "id": "docume-yen-cash",
